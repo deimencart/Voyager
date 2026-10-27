@@ -1,0 +1,217 @@
+<mxfile host="Electron" agent="Antigravity-Robotics-Diagrammer">
+  <diagram id="voyager3-clean-wiring-v3" name="Diagrama Sencillo Conexiones RPi - Pixhawk">
+    <mxGraphModel dx="2946" dy="1752" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2500" pageHeight="1450" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="&lt;b&gt;&lt;font size=&#39;5&#39; color=&#39;#0D47A1&#39;&gt;DIAGRAMA DE CONEXIONES: ENTRADAS Y SALIDAS (UGV VOYAGER 3)&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font size=&#39;3&#39; color=&#39;#455A64&#39;&gt;Topología Hardware: Companion Computer (RPi 3B) ↔ Autopiloto (Pixhawk 1) | Cadena Batería ➔ Power Module ➔ Pixhawk/PDB&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="2100" x="200" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="pdb_container" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=2;shadow=1;" value="" vertex="1">
+          <mxGeometry height="150" width="1860" x="340" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="pdb_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;b&gt;&lt;font size=&#39;3&#39; color=&#39;#B71C1C&#39;&gt;CADENA DE ALIMENTACIÓN PRIMARIA: BATERÍA ➔ 3DR POWER MODULE ➔ DISTRIBUCIÓN&lt;/font&gt;&lt;/b&gt;" vertex="1">
+          <mxGeometry height="25" width="1840" x="350" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="pdb_bat" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EF5350;strokeColor=#B71C1C;fontColor=#FFFFFF;fontStyle=1;fontSize=11;" value="&lt;b&gt;Batería LiPo 3S&lt;/b&gt;&lt;br&gt;11.1V - 12.6V DC&lt;br&gt;3300 mAh (Conector XT60)" vertex="1">
+          <mxGeometry height="95" width="175" x="360" y="122" as="geometry" />
+        </mxCell>
+        <mxCell id="pdb_pm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2.5;fontColor=#0D47A1;fontStyle=1;fontSize=11;" value="&lt;b&gt;3DR POWER MODULE&lt;/b&gt;&lt;br&gt;&lt;b&gt;Sensor V/I + Regulador&lt;/b&gt;&lt;br&gt;• Shunt Corriente: 17 A/V&lt;br&gt;• Divisor Voltaje: 12.1:1&lt;br&gt;&lt;font color=&#39;#0D47A1&#39;&gt;&lt;b&gt;► 6 hilos directo a Pixhawk&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="95" width="215" x="580" y="122" as="geometry" />
+        </mxCell>
+        <mxCell id="pdb_out_12v" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontColor=#BF360C;fontStyle=1;fontSize=11;" value="&lt;b&gt;Salida Directa 12V DC&lt;/b&gt;&lt;br&gt;(Potencia Motor LiDAR SF40)&lt;br&gt;&lt;font color=&#39;#B71C1C&#39;&gt;Tensión batería sin reducir&lt;/font&gt;" vertex="1">
+          <mxGeometry height="95" width="210" x="840" y="122" as="geometry" />
+        </mxCell>
+        <mxCell id="pdb_bec_rpi" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;fontColor=#1B5E20;fontStyle=1;fontSize=11;" value="&lt;b&gt;Turnigy MultiStar SBEC&lt;/b&gt;&lt;br&gt;&lt;b&gt;Entrada:&lt;/b&gt; 6V - 30V DC (desde PM)&lt;br&gt;&lt;b&gt;Salida:&lt;/b&gt; 5.0V DC / 5A (Step-Down)&lt;br&gt;&lt;font color=&#39;#1B5E20&#39;&gt;&lt;b&gt;► Alimenta a Raspberry Pi 3B&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="95" width="235" x="1095" y="122" as="geometry" />
+        </mxCell>
+        <mxCell id="pdb_bec_servo" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#FBC02D;fontColor=#F57F17;fontStyle=1;fontSize=11;" value="&lt;b&gt;Regulador BEC 2 (5.57V)&lt;/b&gt;&lt;br&gt;Rail Servos MAIN OUT&lt;br&gt;Lectura: 5576 mV" vertex="1">
+          <mxGeometry height="95" width="205" x="1375" y="122" as="geometry" />
+        </mxCell>
+        <mxCell id="pdb_gnd" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#455A64;fontColor=#263238;fontStyle=1;fontSize=11;" value="&lt;b&gt;Masa Común (GND)&lt;/b&gt;&lt;br&gt;Referencia 0V&lt;br&gt;Plano equipotencial" vertex="1">
+          <mxGeometry height="95" width="175" x="1625" y="122" as="geometry" />
+        </mxCell>
+        <mxCell id="pdb_warn_12v" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#E53935;fontSize=10;align=center;" value="&lt;font color=&#39;#B71C1C&#39;&gt;&lt;b&gt;¡AVISO SF40!&lt;/b&gt;&lt;br&gt;Requiere 12V DC.&lt;br&gt;¡5V lo apaga!&lt;/font&gt;" vertex="1">
+          <mxGeometry height="95" width="145" x="1845" y="122" as="geometry" />
+        </mxCell>
+        <mxCell id="perif_cam" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=2;fontColor=#4A148C;fontSize=12;" value="&lt;b&gt;Cámara RPi v2&lt;/b&gt;&lt;br&gt;Sensor Sony IMX219 (8MP)&lt;br&gt;&lt;font color=&#39;#7B1FA2&#39;&gt;Vídeo H.264 @ 30fps&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="240" x="35" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="perif_lte" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FB8C00;strokeWidth=2.5;fontColor=#E65100;fontStyle=1;fontSize=11;" value="&lt;b&gt;Módem GSM/4G LTE Huawei&lt;/b&gt;&lt;br&gt;Dongle USB HiLink con Tarjeta SIM&lt;br&gt;&lt;b&gt;Gateway HiLink:&lt;/b&gt; 192.168.8.1&lt;br&gt;&lt;font color=&#39;#E65100&#39;&gt;&lt;b&gt;► Conectado por USB al MikroTik&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="95" width="240" x="35" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="perif_mkt" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2.5;fontColor=#004D40;fontStyle=1;fontSize=11;" value="&lt;b&gt;Router MikroTik RouterBOARD&lt;/b&gt;&lt;br&gt;Modelo mAP 2nD (Gateway: 192.168.1.1)&lt;br&gt;• &lt;b&gt;Puerto USB:&lt;/b&gt; Recibe módem GSM Huawei&lt;br&gt;• &lt;b&gt;Puerto LAN:&lt;/b&gt; Conecta a eth0 de RPi" vertex="1">
+          <mxGeometry height="105" width="240" x="35" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="perif_gcs" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE7F6;strokeColor=#512DA8;strokeWidth=2;fontColor=#311B92;fontSize=12;" value="&lt;b&gt;Estación Tierra (GCS Laptop)&lt;/b&gt;&lt;br&gt;Mission Planner / QGroundControl&lt;br&gt;&lt;font color=&#39;#512DA8&#39;&gt;Wi-Fi Hotspot: DroneLab (UDP 14550)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="240" x="35" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="box_rpi" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=3;shadow=1;" value="" vertex="1">
+          <mxGeometry height="800" width="560" x="340" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_rpi" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;b&gt;&lt;font size=&#39;4&#39; color=&#39;#1B5E20&#39;&gt;RASPBERRY PI 3 MODEL B&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font size=&#39;2&#39; color=&#39;#333333&#39;&gt;Companion Computer (Raspbian 9 Stretch / MAVProxy)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="35" width="540" x="350" y="268" as="geometry" />
+        </mxCell>
+        <mxCell id="port_csi" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=11;" value="&lt;b&gt;Puerto CSI (Cámara)&lt;/b&gt;&lt;br&gt;Cinta plana FFC 15 pines" vertex="1">
+          <mxGeometry height="65" width="200" x="365" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="port_eth" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;fontSize=11;" value="&lt;b&gt;Puerto eth0 (RJ45)&lt;/b&gt;&lt;br&gt;Ethernet 10/100 Mbps&lt;br&gt;&lt;font color=&#39;#00695C&#39;&gt;Desde LAN del MikroTik&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="200" x="365" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="port_wlan" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE7F6;strokeColor=#512DA8;fontSize=11;" value="&lt;b&gt;Antena Wi-Fi (wlan0)&lt;/b&gt;&lt;br&gt;2.4 GHz (192.168.137.153)" vertex="1">
+          <mxGeometry height="65" width="200" x="365" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="port_rpi_pwr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;fontSize=11;" value="&lt;b&gt;Alimentación (Power IN)&lt;/b&gt;&lt;br&gt;Entrada 5.0V DC (Micro-USB / GPIO)&lt;br&gt;&lt;font color=&#39;#1B5E20&#39;&gt;&lt;b&gt;Desde Turnigy MultiStar SBEC&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="230" x="365" y="830" as="geometry" />
+        </mxCell>
+        <mxCell id="port_rpi_uart" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;fontSize=11;align=left;spacingLeft=12;" value="&lt;b&gt;&lt;font size=&#39;3&#39; color=&#39;#0D47A1&#39;&gt;Puerto UART (/dev/serial0)&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;Pin 8:&lt;/b&gt; &lt;code&gt;GPIO 14 (TXD)&lt;/code&gt;&lt;br&gt;• &lt;b&gt;Pin 10:&lt;/b&gt; &lt;code&gt;GPIO 15 (RXD)&lt;/code&gt;&lt;br&gt;• &lt;b&gt;Pin 6:&lt;/b&gt; &lt;code&gt;GND (Masa)&lt;/code&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;Velocidad:&lt;/b&gt; 921.600 bps&lt;br&gt;&lt;b&gt;Protocolo:&lt;/b&gt; MAVLink 1.0/2.0&lt;br&gt;&lt;b&gt;Nivel Lógico:&lt;/b&gt; 3.3V TTL" vertex="1">
+          <mxGeometry height="210" width="230" x="640" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="rpi_sw_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#81C784;fontSize=10;align=left;spacingLeft=10;" value="&lt;b&gt;Procesos y Enrutamiento en Raspberry Pi:&lt;/b&gt;&lt;br&gt;• &lt;b&gt;Cadena de Red:&lt;/b&gt; Módem GSM ➔ MikroTik ➔ eth0 RPi (acceso a Internet / VPN).&lt;br&gt;• &lt;b&gt;MAVProxy:&lt;/b&gt; /dev/serial0 (921.600 bps) ➔ UDP 14550 (GCS PC) y 127.0.0.1:1234.&lt;br&gt;• &lt;b&gt;adapter.py:&lt;/b&gt; DroneKit-Python serializa telemetría hacia Kafka (172.19.0.18)." vertex="1">
+          <mxGeometry height="110" width="510" x="365" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="warn_isolation" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#D32F2F;strokeWidth=2;fontSize=10;align=center;" value="&lt;b&gt;&lt;font color=&#39;#B71C1C&#39;&gt;¡AISLAMIENTO CRÍTICO!&lt;/font&gt;&lt;/b&gt;&lt;br&gt;El pin &lt;b&gt;+5V&lt;/b&gt; de TELEM 2 &lt;b&gt;NO&lt;/b&gt; se conecta.&lt;br&gt;RPi se alimenta de su Turnigy MultiStar SBEC." vertex="1">
+          <mxGeometry height="80" width="270" x="1050" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="box_pix" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=3;shadow=1;" value="" vertex="1">
+          <mxGeometry height="800" width="560" x="1470" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_pix" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;b&gt;&lt;font size=&#39;4&#39; color=&#39;#0D47A1&#39;&gt;PIXHAWK 1 (PX4v3)&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font size=&#39;2&#39; color=&#39;#333333&#39;&gt;Autopiloto de Navegación (Firmware ArduRover V3.4.2)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="35" width="540" x="1480" y="268" as="geometry" />
+        </mxCell>
+        <mxCell id="port_pix_telem2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;fontSize=11;align=left;spacingLeft=12;" value="&lt;b&gt;&lt;font size=&#39;3&#39; color=&#39;#0D47A1&#39;&gt;Puerto TELEM 2 (6 pines)&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;Pin 1:&lt;/b&gt; &lt;code&gt;+5V&lt;/code&gt; &lt;font color=&#39;#D32F2F&#39;&gt;&lt;b&gt;[DESCONECTADO]&lt;/b&gt;&lt;/font&gt;&lt;br&gt;• &lt;b&gt;Pin 2:&lt;/b&gt; &lt;code&gt;TXD (Salida 3.3V)&lt;/code&gt;&lt;br&gt;• &lt;b&gt;Pin 3:&lt;/b&gt; &lt;code&gt;RXD (Entrada 3.3V)&lt;/code&gt;&lt;br&gt;• &lt;b&gt;Pin 6:&lt;/b&gt; &lt;code&gt;GND (Masa)&lt;/code&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;Parámetro:&lt;/b&gt; &lt;code&gt;SERIAL2_BAUD = 921&lt;/code&gt;&lt;br&gt;&lt;b&gt;Protocolo:&lt;/b&gt; &lt;code&gt;SERIAL2_PROTOCOL = 1&lt;/code&gt;" vertex="1">
+          <mxGeometry height="210" width="230" x="1500" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="port_pix_pwr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;fontSize=11;align=left;spacingLeft=12;" value="&lt;b&gt;&lt;font size=&#39;3&#39; color=&#39;#0D47A1&#39;&gt;Puerto POWER (6 pines)&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;br&gt;• &lt;b&gt;Pines 1-2:&lt;/b&gt; &lt;code&gt;VCC (+5.3V)&lt;/code&gt;&lt;br&gt;• &lt;b&gt;Pin 3:&lt;/b&gt; &lt;code&gt;CURRENT (Pin 3 ADC)&lt;/code&gt;&lt;br&gt;• &lt;b&gt;Pin 4:&lt;/b&gt; &lt;code&gt;VOLTAGE (Pin 2 ADC)&lt;/code&gt;&lt;br&gt;• &lt;b&gt;Pines 5-6:&lt;/b&gt; &lt;code&gt;GND (Masa lógica)&lt;/code&gt;&lt;br&gt;&lt;font color=&#39;#0D47A1&#39;&gt;&lt;b&gt;◄ Directo desde 3DR Power Module&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="115" width="230" x="1500" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="port_pix_rcin" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#607D8B;fontSize=11;" value="&lt;b&gt;Puerto RC IN&lt;/b&gt;&lt;br&gt;Señal PPM / S.BUS" vertex="1">
+          <mxGeometry height="55" width="200" x="1500" y="830" as="geometry" />
+        </mxCell>
+        <mxCell id="port_ser45" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=11;" value="&lt;b&gt;Puerto SERIAL 4/5&lt;/b&gt;&lt;br&gt;UART 115.200 bps&lt;br&gt;&lt;font color=&#39;#BF360C&#39;&gt;LiDAR SF40/C (+5V VACÍO)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="210" x="1790" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="port_ser3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE7F6;strokeColor=#512DA8;fontSize=11;" value="&lt;b&gt;Puerto SERIAL 3 + I2C&lt;/b&gt;&lt;br&gt;UART 38.400 bps + I2C&lt;br&gt;&lt;font color=&#39;#512DA8&#39;&gt;GPS Neo-M8N + Brújula&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="210" x="1790" y="435" as="geometry" />
+        </mxCell>
+        <mxCell id="port_main1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#FBC02D;fontSize=11;" value="&lt;b&gt;MAIN OUT 1 (PWM)&lt;/b&gt;&lt;br&gt;Servo Dirección Ackermann&lt;br&gt;&lt;font color=&#39;#F57F17&#39;&gt;SERVO1_FUNCTION = 26&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="210" x="1790" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="port_main3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFECB3;strokeColor=#FFA000;fontSize=11;" value="&lt;b&gt;MAIN OUT 3 (PWM)&lt;/b&gt;&lt;br&gt;Variador ESC Motor Tracción&lt;br&gt;&lt;font color=&#39;#FF6F00&#39;&gt;SERVO3_FUNCTION = 70&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="210" x="1790" y="665" as="geometry" />
+        </mxCell>
+        <mxCell id="port_servorail" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#FBC02D;fontSize=11;" value="&lt;b&gt;Rail Central Servos&lt;/b&gt;&lt;br&gt;Alimentado a 5.57V DC (BEC 2)" vertex="1">
+          <mxGeometry height="65" width="210" x="1790" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="pix_sw_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#90CAF9;fontSize=10;align=left;spacingLeft=10;" value="&lt;b&gt;Configuración Activa ArduRover:&lt;/b&gt;&lt;br&gt;• &lt;b&gt;Dirección (MAIN 1):&lt;/b&gt; 1100 - 1900 us (Trim 1470 us, Reverse 1)&lt;br&gt;• &lt;b&gt;Tracción (MAIN 3):&lt;/b&gt; 900 - 2000 us (Trim 1300 us, Reverse 1)&lt;br&gt;• &lt;b&gt;LiDAR (SERIAL 4):&lt;/b&gt; PRX_TYPE = 1, AVOID_ENABLE = 3 (Parada ante obstáculos a 5m)" vertex="1">
+          <mxGeometry height="110" width="500" x="1500" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="perif_lidar" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;fontColor=#BF360C;fontSize=12;" value="&lt;b&gt;LiDAR LightWare SF40/C&lt;/b&gt;&lt;br&gt;Sensor 360° (0.2m - 100m)&lt;br&gt;&lt;font color=&#39;#B71C1C&#39;&gt;&lt;b&gt;Alimentación: 12V DC (PDB)&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="230" x="2130" y="315" as="geometry" />
+        </mxCell>
+        <mxCell id="perif_gps" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE7F6;strokeColor=#512DA8;strokeWidth=2;fontColor=#311B92;fontSize=12;" value="&lt;b&gt;GPS U-blox Neo-M8N&lt;/b&gt;&lt;br&gt;+ Brújula Externa en Mástil&lt;br&gt;&lt;font color=&#39;#512DA8&#39;&gt;UART 38.400 bps + I2C&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="230" x="2130" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="perif_servo" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#FBC02D;strokeWidth=2;fontColor=#F57F17;fontSize=12;" value="&lt;b&gt;Servo Dirección Delantera&lt;/b&gt;&lt;br&gt;Ruedas directrices Ackermann&lt;br&gt;&lt;font color=&#39;#F57F17&#39;&gt;PWM 50Hz (Alimentación 5.57V)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="230" x="2130" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="perif_esc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFECB3;strokeColor=#FFA000;strokeWidth=2;fontColor=#FF6F00;fontSize=12;" value="&lt;b&gt;Variador ESC + Motor&lt;/b&gt;&lt;br&gt;Tracción motor eléctrico&lt;br&gt;&lt;font color=&#39;#FF6F00&#39;&gt;PWM Throttle (Gas / Marcha atrás)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="230" x="2130" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="perif_rc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#607D8B;strokeWidth=2;fontColor=#263238;fontSize=12;" value="&lt;b&gt;Receptor RC Manual&lt;/b&gt;&lt;br&gt;Radio Control 2.4 GHz&lt;br&gt;&lt;font color=&#39;#263238&#39;&gt;Salida PPM/SBUS a RC IN&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="230" x="2130" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cam_csi" edge="1" parent="1" source="perif_cam" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#7B1FA2;strokeWidth=2.5;fontColor=#4A148C;fontStyle=1;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="port_csi" value="CSI (Cinta 15p)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gsm_to_mkt" edge="1" parent="1" source="perif_lte" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#FB8C00;strokeWidth=2.5;fontColor=#E65100;fontStyle=1;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="perif_mkt" value="USB GSM HiLink">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mkt_eth" edge="1" parent="1" source="perif_mkt" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#00897B;strokeWidth=2.5;fontColor=#004D40;fontStyle=1;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="port_eth" value="Ethernet RJ45 (LAN)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gcs_wlan" edge="1" parent="1" source="perif_gcs" style="edgeStyle=orthogonalEdgeStyle;rounded=1;dashed=1;strokeColor=#512DA8;strokeWidth=2.5;fontColor=#311B92;fontStyle=1;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="port_wlan" value="Wi-Fi (UDP 14550)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_uart_tx" edge="1" parent="1" source="port_rpi_uart" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#0288D1;strokeWidth=3;fontColor=#01579B;fontStyle=1;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="port_pix_telem2" value="TX (Pin 8) ────────────────────────► RX (Pin 3) [3.3V TTL]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_uart_rx" edge="1" parent="1" source="port_pix_telem2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#00897B;strokeWidth=3;fontColor=#004D40;fontStyle=1;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.55;exitDx=0;exitDy=0;entryX=1;entryY=0.55;entryDx=0;entryDy=0;" target="port_rpi_uart" value="RX (Pin 10) ◄──────────────────────── TX (Pin 2) [3.3V TTL]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_uart_gnd" edge="1" parent="1" source="port_rpi_uart" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;strokeColor=#37474F;strokeWidth=2.5;fontColor=#263238;fontStyle=1;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.85;exitDx=0;exitDy=0;entryX=0;entryY=0.85;entryDx=0;entryDy=0;" target="port_pix_telem2" value="GND (Pin 6) ◄────────────────────────► GND (Pin 6) [Masa]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pix_ser45" edge="1" parent="1" source="port_ser45" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#E65100;strokeWidth=2.5;fontColor=#BF360C;fontStyle=1;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="perif_lidar" value="UART 115.200 bps (TX/RX/GND)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pix_ser3" edge="1" parent="1" source="port_ser3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#512DA8;strokeWidth=2.5;fontColor=#311B92;fontStyle=1;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="perif_gps" value="UART + I2C">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pix_main1" edge="1" parent="1" source="port_main1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#FBC02D;strokeWidth=2.5;fontColor=#F57F17;fontStyle=1;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="perif_servo" value="PWM Dirección + 5.57V">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pix_main3" edge="1" parent="1" source="port_main3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#FFA000;strokeWidth=2.5;fontColor=#FF6F00;fontStyle=1;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="perif_esc" value="PWM Tracción ESC">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pix_rc" edge="1" parent="1" source="perif_rc" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#607D8B;strokeWidth=2.5;fontColor=#263238;fontStyle=1;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="port_pix_rcin" value="Señal PPM/SBUS">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2110" y="830" />
+              <mxPoint x="2110" y="890" />
+              <mxPoint x="1740" y="890" />
+              <mxPoint x="1740" y="855" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_bat_to_pm" edge="1" parent="1" source="pdb_bat" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#D32F2F;strokeWidth=3.5;fontColor=#B71C1C;fontStyle=1;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="pdb_pm" value="Cable XT60 (12V)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pm_to_pix" edge="1" parent="1" source="pdb_pm" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#1565C0;strokeWidth=3;fontColor=#0D47A1;fontStyle=1;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="port_pix_pwr" value="Cable Cinta 6 Hilos (5.3V + V/I + GND)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="687" y="245" />
+              <mxPoint x="1420" y="245" />
+              <mxPoint x="1420" y="755" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_pm_to_dist" edge="1" parent="1" source="pdb_pm" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#E65100;strokeWidth=3;fontColor=#BF360C;fontStyle=1;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="pdb_out_12v" value="Línea Pasante 12V">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pwr_12v" edge="1" parent="1" source="pdb_out_12v" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#D32F2F;strokeWidth=3;fontColor=#B71C1C;fontStyle=1;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="perif_lidar" value="Cable 12V DC Motor">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="945" y="240" />
+              <mxPoint x="2245" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_pwr_to_sbec" edge="1" parent="1" source="pdb_out_12v" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#2E7D32;strokeWidth=2.5;fontColor=#1B5E20;fontStyle=1;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="pdb_bec_rpi" value="Alimentación 12V">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pwr_rpi" edge="1" parent="1" source="pdb_bec_rpi" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#2E7D32;strokeWidth=3;fontColor=#1B5E20;fontStyle=1;labelBackgroundColor=#FFFFFF;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.1;entryY=0;entryDx=0;entryDy=0;" target="port_rpi_pwr" value="Alimentación 5.0V / 5A (MultiStar)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1142" y="245" />
+              <mxPoint x="320" y="245" />
+              <mxPoint x="320" y="810" />
+              <mxPoint x="388" y="810" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_pwr_servo" edge="1" parent="1" source="pdb_bec_servo" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#FBC02D;strokeWidth=3;fontColor=#F57F17;fontStyle=1;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="port_servorail" value="BEC 5.57V Rail Servos">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1477" y="245" />
+              <mxPoint x="1895" y="245" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#B0BEC5;strokeWidth=1.5;fontSize=12;align=center;" value="&lt;b&gt;RESUMEN DE CABLES:&lt;/b&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;font color=&#39;#D32F2F&#39;&gt;&lt;b&gt;■ Rojo:&lt;/b&gt; Potencia 12V DC (LiDAR SF40/C / Batería)&lt;/font&gt; &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; &lt;font color=&#39;#1565C0&#39;&gt;&lt;b&gt;■ Azul:&lt;/b&gt; Cable Cinta 6 Pines (Power Module ➔ Pixhawk POWER)&lt;/font&gt; &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; &lt;font color=&#39;#2E7D32&#39;&gt;&lt;b&gt;■ Verde:&lt;/b&gt; Alimentación 5.0V DC (Turnigy MultiStar ➔ RPi 3B)&lt;/font&gt; &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; &lt;font color=&#39;#F57F17&#39;&gt;&lt;b&gt;■ Amarillo:&lt;/b&gt; Alimentación 5.57V DC (Rail Servos)&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#FB8C00&#39;&gt;&lt;b&gt;■ Naranja:&lt;/b&gt; Cable USB Módem GSM ➔ MikroTik&lt;/font&gt; &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; &lt;font color=&#39;#00897B&#39;&gt;&lt;b&gt;■ Verde Azulado:&lt;/b&gt; Cable Ethernet MikroTik ➔ RPi eth0&lt;/font&gt; &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; &lt;font color=&#39;#0288D1&#39;&gt;&lt;b&gt;■ Azul Cyan:&lt;/b&gt; Señal TX Serie (3.3V TTL)&lt;/font&gt; &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; &lt;font color=&#39;#263238&#39;&gt;&lt;b&gt;- - Discontinuo:&lt;/b&gt; Masa (GND) Común&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="2100" x="200" y="1090" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

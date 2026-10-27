@@ -1,0 +1,45 @@
+# Forensic disk images and backups (~64 GB)
+sdbackup/
+backup_sdbackup/
+*.img
+*.iso
+*.tar
+*.tar.gz
+*.zip
+
+# Cloned third-party external repositories
+repos/
+
+# ROS 2 build, install, and log artifacts
+ros2_ws/build/
+ros2_ws/install/
+ros2_ws/log/
+
+# Python caches and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.whl
+
+# Extracted Raspberry Pi root filesystem dumps
+analisis_sistema/etc/
+analisis_sistema/home_pi/
+analisis_sistema/root/
+analisis_sistema/var/
+analisis_sistema/Voyager_3_root/
+
+# Telemetry binary logs and raw dump files
+*.tlog*
+*.rlog*
+
+# Draw.io backup files
+.*.bkp
+*.bkp
+
+# Office temporary lock files
+~$*
+
+# OS specific files
+.DS_Store
+Thumbs.db
+desktop.ini

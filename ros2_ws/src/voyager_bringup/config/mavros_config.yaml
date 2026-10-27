@@ -1,0 +1,13 @@
+mavros:
+  ros__parameters:
+    fcu_url: "/dev/serial0:921600"
+    gcs_url: "udp://@192.168.4.255:14550"
+    target_system_id: 1
+    target_component_id: 1
+    fcu_protocol: "v2.0"
+    conn:
+      heartbeat_rate: 1.0
+      timeout: 10.0
+    time:
+      time_ref_source: "fcu"
+      timesync_mode: "PASSTHROUGH"
