@@ -43,9 +43,14 @@ The **Voyager 3** is a rugged unmanned ground vehicle (UGV) engineered for outdo
 
 ## Fast-Track Getting Started
 
-To operate the rover immediately **without ROS** using Mission Planner:
+> **How the Rover Connects:** The rover does not create its own Wi-Fi. When powered on, it actively searches for a specific hotspot to connect to you. You must create this hotspot on your phone or laptop before turning on the rover:
+> * **Name (SSID):** `DroneLab`
+> * **Password:** `stavrospapas`
+> * **Band:** 2.4 GHz
 
-1. **Power up the vehicle:** Connect the 3S LiPo battery via the main XT60 connector.
-2. **Connect your PC to the rover network:** Associate with the `DroneLab` Wi-Fi hotspot or connect to the MikroTik router.
-3. **Establish MAVLink forwarding:** Follow the [Network & Telemetry Setup](documentation/initial_setup/01_network_and_telemetry.md).
-4. **Drive with Mission Planner:** Follow the [Mission Planner & Drive Guide](documentation/initial_setup/02_mission_planner_and_drive.md).
+To start driving without ROS:
+
+1. **Turn on your Hotspot:** Set the name to `DroneLab` and password to `stavrospapas`.
+2. **Power up the Rover:** Plug in the 3S LiPo battery. The rover connects to your hotspot automatically within ~30 seconds.
+3. **Find the Rover IP:** Check your hotspot's connected devices list to see the rover's IP.
+4. **Start Telemetry & Drive:** Follow the [Network & Telemetry Setup](documentation/initial_setup/01_network_and_telemetry.md) and [Mission Planner Guide](documentation/initial_setup/02_mission_planner_and_drive.md).

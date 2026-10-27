@@ -12,25 +12,21 @@ This guide explains how to establish the network connection between your Ground 
 
 ---
 
-## Step 1.1: Connect to the Rover Network
+## Step 1.1: Connect the Rover to Your Hotspot
 
-The Raspberry Pi companion computer is configured to automatically associate with the pre-stored laboratory network credentials.
+> **Important:** The rover does not broadcast a Wi-Fi network. Instead, as soon as it turns on, it actively looks for a specific Wi-Fi hotspot to connect to you.
 
-### Primary Connection Method: Wi-Fi Hotspot
+To connect with the rover:
 
-1. On your laptop (or smartphone), enable your **Mobile Hotspot**:
-   * **Network Name (SSID):** `DroneLab`
-   * **Password (Security Key):** `stavrospapas`
+1. **Turn on Mobile Hotspot** on your phone or laptop.
+2. **Configure the exact credentials** expected by the rover:
+   * **Hotspot Name (SSID):** `DroneLab`
+   * **Password:** `stavrospapas`
    * **Band:** 2.4 GHz
-2. Power on the robot.
-3. Within 30 to 45 seconds, the Raspberry Pi will automatically join the hotspot.
-4. Open your laptop's hotspot settings and note the IP assigned to the Raspberry Pi (typically `192.168.137.153` or similar within `192.168.137.0/24`).
+3. **Turn on the rover.** It will automatically connect to your hotspot in ~30–45 seconds.
+4. **Find the rover's IP address** in your hotspot's connected devices list (e.g. `192.168.137.153`).
 
-### Alternative Method: MikroTik Router / Ethernet
-
-If operating in the field without a hotspot:
-1. Connect an Ethernet cable directly from your laptop to the spare LAN port of the onboard **MikroTik router** (`192.168.1.1`).
-2. Your laptop will receive a DHCP address in the `192.168.1.x` subnet. The Raspberry Pi will be reachable at `192.168.1.100` (or `eth0` static lease).
+*(Optional field alternative: You can also connect a direct Ethernet cable from your laptop to the onboard MikroTik router at `192.168.1.1`)*
 
 ---
 
