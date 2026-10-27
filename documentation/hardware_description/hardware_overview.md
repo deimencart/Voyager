@@ -18,7 +18,7 @@ This document details the physical components (Bill of Materials) and the power 
 | **Rear Traction** | Electronic Speed Controller | Brushless/Brushed RC Car ESC + Motor | PWM Throttle on `MAIN OUT 3` | $11.1 - 12.6\text{ V}$ DC (Direct LiPo) |
 | **Manual Override** | 2.4 GHz RC Receiver | PPM / S.BUS Safety Receiver | `RC IN` on Pixhawk | $5.0\text{ V}$ DC (from Pixhawk) |
 | **Vision Camera** | HD Camera Module | Raspberry Pi Camera v2 (Sony IMX219) | 15-pin MIPI CSI-2 Ribbon | $3.3\text{ V}$ DC (from RPi bus) |
-| **Main Battery** | 3S LiPo Battery Pack | 11.1V – 12.6V DC, ~3300 mAh, XT60 | Power Distribution Board (PDB) | Nominal $11.1\text{ V} - 12.6\text{ V}$ |
+| **Main Battery** | 4S LiPo Battery Pack | 14.8V – 16.8V DC, XT60 | Power Distribution Board (PDB) | Nominal $14.8\text{ V} - 16.8\text{ V}$ |
 
 ---
 
@@ -27,9 +27,9 @@ This document details the physical components (Bill of Materials) and the power 
 The platform uses **four decoupled voltage domains** to avoid ground loops and protect delicate digital electronics from motor electrical noise:
 
 ```text
-3S LiPo Battery (11.1V - 12.6V DC) via XT60
+4S LiPo Battery (14.8V - 16.8V DC) via XT60
   │
-  ├──► [Direct 12V PDB Rail] ──────► LightWare SF40/C LiDAR (Motor & Laser)
+  ├──► [Direct PDB Rail] ────────► LightWare SF40/C LiDAR (Motor & Laser)
   │                          ──────► Electronic Speed Controller (ESC Traction Power)
   │                          ──────► MikroTik mAP Router
   │
@@ -56,3 +56,8 @@ The platform uses **four decoupled voltage domains** to avoid ground loops and p
 > [!IMPORTANT]
 > **RULE 3: Servo Rail Power Requirement**  
 > Pixhawk's servo output rail (`MAIN OUT 1-8`) does not receive power from the Pixhawk power port. It is powered independently at **5.57V DC** by the auxiliary BEC to provide mechanical torque to the steering servo without causing voltage drops to the flight controller.
+
+> [!WARNING]
+> **RULE 4: Bench Power Supply vs. 4S LiPo Battery**  
+> Do not use standard PC (ATX) power supplies for testing. When the motor accelerates or the steering servo turns, sharp current spikes trip the power supply's over-current protection (OCP), causing an immediate shutdown.  
+> The rover is powered by a **4S LiPo battery** ($14.8\text{ V}$ – $16.8\text{ V}$), which delivers high peak discharge currents without voltage collapse.

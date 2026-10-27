@@ -12,9 +12,11 @@ This guide explains how to establish the network connection between your Ground 
 
 ---
 
-## Step 1.1: Connect the Rover to Your Hotspot
+## Step 1.1: Connect the Rover via Hotspot
 
-> **Important:** The rover does not broadcast a Wi-Fi network. Instead, as soon as it turns on, it actively looks for a specific Wi-Fi hotspot to connect to you.
+> **Note on Wi-Fi Networks:**  
+> The onboard MikroTik router broadcasts its own Wi-Fi named `Voyager 3`. However, connecting directly to it is often unreliable due to DHCP/IP conflicts.  
+> The tested and hassle-free method is to create a mobile hotspot on your phone or laptop. The rover is pre-configured to look for this hotspot and join it automatically.
 
 To connect with the rover:
 
@@ -23,7 +25,7 @@ To connect with the rover:
    * **Hotspot Name (SSID):** `DroneLab`
    * **Password:** `stavrospapas`
    * **Band:** 2.4 GHz
-3. **Turn on the rover.** It will automatically connect to your hotspot in ~30–45 seconds.
+3. **Turn on the rover** by plugging in the 4S LiPo battery. It connects to your hotspot automatically within ~30–45 seconds.
 4. **Find the rover's IP address** in your hotspot's connected devices list (e.g. `192.168.137.153`).
 
 *(Optional field alternative: You can also connect a direct Ethernet cable from your laptop to the onboard MikroTik router at `192.168.1.1`)*

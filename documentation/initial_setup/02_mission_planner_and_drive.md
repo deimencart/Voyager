@@ -26,7 +26,7 @@ Before arming the vehicle, verify the following indicators in the **Flight Data*
 | Telemetry Item | Nominal Value | What It Confirms |
 | :--- | :--- | :--- |
 | **Flight Mode** | `HOLD` or `MANUAL` | Vehicle will not attempt autonomous movement upon arming. |
-| **Battery Voltage** | `11.1V - 12.6V` | Main LiPo battery is connected and healthy. |
+| **Battery Voltage** | `14.8V - 16.8V` (4S LiPo) | Main battery is connected and healthy (handles motor current surges). |
 | **Servo Voltage (`servovoltage`)** | `~5.57V` ($5570\text{ mV}$) | Auxiliary BEC is powering the `MAIN OUT` servo rail for steering. |
 | **GPS Status** | `GPS: No Fix` (Indoor) / `3D Fix` (Outdoor) | GPS unit is communicating with Pixhawk via `SERIAL 3`. |
 | **Proximity Radar (Ctrl+F)** | 360° obstacle vectors | LightWare SF40/C is streaming distances via `SERIAL 4/5`. |

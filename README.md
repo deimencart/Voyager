@@ -37,20 +37,31 @@ The **Voyager 3** is a rugged unmanned ground vehicle (UGV) engineered for outdo
 | **Primary Perception** | LightWare SF40/C LiDAR | 360° laser scanner (0.2 m – 100 m range), **powered strictly at 12V DC** |
 | **Global Navigation** | U-blox Neo-M8N GNSS | External GPS antenna with master I2C digital compass |
 | **Ground Control Software** | Mission Planner / QGC | MAVLink telemetry stream over UDP port `14550` |
-| **Power Supply** | 3S LiPo Battery | 11.1V – 12.6V DC nominal with independent step-down BECs |
+| **Power Supply** | 4S LiPo Battery | 14.8V – 16.8V DC nominal (handles motor current peaks without tripping) |
 
 ---
 
 ## Fast-Track Getting Started
 
-> **How the Rover Connects:** The rover does not create its own Wi-Fi. When powered on, it actively searches for a specific hotspot to connect to you. You must create this hotspot on your phone or laptop before turning on the rover:
+> **Wi-Fi Connection Note:** The onboard router broadcasts an SSID named `Voyager 3`, but connecting directly to it is often tricky or blocked by network conflicts. The proven, reliable method is to create a mobile hotspot on your phone or laptop with the credentials below — the rover automatically connects to it:
 > * **Name (SSID):** `DroneLab`
 > * **Password:** `stavrospapas`
 > * **Band:** 2.4 GHz
 
 To start driving without ROS:
 
-1. **Turn on your Hotspot:** Set the name to `DroneLab` and password to `stavrospapas`.
-2. **Power up the Rover:** Plug in the 3S LiPo battery. The rover connects to your hotspot automatically within ~30 seconds.
-3. **Find the Rover IP:** Check your hotspot's connected devices list to see the rover's IP.
+1. **Turn on your Hotspot:** Set the name to `DroneLab` and password to `stavrospapas` (2.4 GHz).
+2. **Power up the Rover:** Plug in the 4S LiPo battery. The rover joins your hotspot automatically in ~30 seconds.
+3. **Find the Rover IP:** Check your hotspot's connected devices list to see the rover's IP address.
 4. **Start Telemetry & Drive:** Follow the [Network & Telemetry Setup](documentation/initial_setup/01_network_and_telemetry.md) and [Mission Planner Guide](documentation/initial_setup/02_mission_planner_and_drive.md).
+
+---
+
+## Operational & Bench Testing Notes
+
+* **Direct Wi-Fi ("Voyager 3") vs. Hotspot:**  
+  Although the onboard router emits its own Wi-Fi network named `Voyager 3`, connecting directly to it often fails or has DHCP assignment issues. Using the `DroneLab` mobile hotspot bypasses this problem completely.
+
+* **Power Supply Warning (PC / ATX Power Supplies):**  
+  Do not use standard PC / ATX computer power supplies for testing. When the steering servo or drive motor demands sudden current surges, the power supply's internal safety protection trips and immediately shuts down the entire system.  
+  The vehicle is powered by a **4S LiPo battery** (14.8V nominal, up to 16.8V fully charged), which supplies high current spikes smoothly without shutting down.
