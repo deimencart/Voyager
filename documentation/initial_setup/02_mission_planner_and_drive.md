@@ -4,7 +4,7 @@ This guide covers connecting **Mission Planner** (or **QGroundControl**) to the 
 
 ---
 
-## 💻 2.1: Connect Mission Planner via UDP
+## 2.1: Connect Mission Planner via UDP
 
 1. Open **Mission Planner** on your laptop.
 2. In the top-right corner of the window:
@@ -19,7 +19,7 @@ This guide covers connecting **Mission Planner** (or **QGroundControl**) to the 
 
 ---
 
-## 🔍 2.2: Pre-Arming Checks & Telemetry Verification
+## 2.2: Pre-Arming Checks & Telemetry Verification
 
 Before arming the vehicle, verify the following indicators in the **Flight Data** screen:
 
@@ -37,7 +37,7 @@ Before arming the vehicle, verify the following indicators in the **Flight Data*
 
 ---
 
-## 🛡️ 2.3: Radio Failsafe Considerations (Bench Testing)
+## 2.3: Radio Failsafe Considerations (Bench Testing)
 
 By default, ArduRover enforces a safety failsafe if no handheld RC transmitter signal is detected (`FS_THR_ENABLE = 1`), preventing arming over telemetry.
 
@@ -53,7 +53,7 @@ If you are bench-testing the rover **without an RC transmitter turned on**:
 
 ---
 
-## 🚀 2.4: Arming the Rover
+## 2.4: Arming the Rover
 
 Once the mode is `MANUAL` and pre-arm checks pass:
 
@@ -73,7 +73,7 @@ MAV> arm throttle
 
 ---
 
-## 🕹️ 2.5: Testing Actuator Motion
+## 2.5: Testing Actuator Motion
 
 ### A. Testing Front Steering (Ackermann Linkage)
 * In the **Actions** tab or via RC Channel 1 override:
@@ -90,7 +90,7 @@ MAV> arm throttle
 
 ---
 
-## 🛑 2.6: Safe Shutdown Procedure
+## 2.6: Safe Shutdown Procedure
 
 1. **Disarm the Vehicle:**
    * In Mission Planner: Click **Disarm** in the Actions tab.

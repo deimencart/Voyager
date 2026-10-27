@@ -4,7 +4,7 @@ This document details the physical components (Bill of Materials) and the power 
 
 ---
 
-## 📋 1. Bill of Materials (BOM)
+## 1. Bill of Materials (BOM)
 
 | Subsystem | Component | Model / Specs | Interface | Operating Voltage |
 | :--- | :--- | :--- | :--- | :---: |
@@ -22,7 +22,7 @@ This document details the physical components (Bill of Materials) and the power 
 
 ---
 
-## ⚡ 2. Power Tree & Voltage Domains
+## 2. Power Tree & Voltage Domains
 
 The platform uses **four decoupled voltage domains** to avoid ground loops and protect delicate digital electronics from motor electrical noise:
 
@@ -43,7 +43,7 @@ The platform uses **four decoupled voltage domains** to avoid ground loops and p
 
 ---
 
-## ⚠️ 3. Critical Electrical Safety Rules
+## 3. Critical Electrical Safety Rules
 
 > [!CAUTION]
 > **RULE 1: LiDAR SF40/C 12V Power Line**  

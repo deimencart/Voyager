@@ -4,7 +4,7 @@ This guide explains how to establish the network connection between your Ground 
 
 ---
 
-## 📋 Prerequisites
+## Prerequisites
 
 * UGV Voyager 3 powered via its main 3S LiPo battery.
 * Operator Laptop running Windows 10/11 or Linux with Wi-Fi enabled.
@@ -12,7 +12,7 @@ This guide explains how to establish the network connection between your Ground 
 
 ---
 
-## 📶 Step 1.1: Connect to the Rover Network
+## Step 1.1: Connect to the Rover Network
 
 The Raspberry Pi companion computer is configured to automatically associate with the pre-stored laboratory network credentials.
 
@@ -34,7 +34,7 @@ If operating in the field without a hotspot:
 
 ---
 
-## 💻 Step 1.2: Verify SSH Access to Raspberry Pi
+## Step 1.2: Verify SSH Access to Raspberry Pi
 
 Open PowerShell or a terminal on your laptop and run:
 
@@ -55,7 +55,7 @@ ls -l /dev/serial0
 
 ---
 
-## 🚀 Step 1.3: Start MAVProxy Telemetry Forwarding
+## Step 1.3: Start MAVProxy Telemetry Forwarding
 
 The Pixhawk sends telemetry out of its `TELEM 2` port at **921,600 baud**. The Raspberry Pi uses **`MAVProxy`** to read this serial stream and forward it over Ethernet/Wi-Fi to your laptop's UDP port `14550`.
 

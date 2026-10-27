@@ -4,47 +4,15 @@ This document describes the internal and external communication architecture of 
 
 ---
 
-## 🗺️ 1. High-Level Data Flow
+## 1. High-Level Data Flow
 
 The architecture operates with a clean separation between **real-time low-level control** (Pixhawk 1) and **networked telemetry forwarding** (Raspberry Pi 3B + MikroTik Router).
 
-```mermaid
-flowchart LR
-    GCS["Ground Control Station\n(Laptop / Mission Planner / QGC)"]
-
-    subgraph Onboard ["UGV VOYAGER 3 (ONBOARD SYSTEM)"]
-        ROUTER["Wireless Router Module\n(MikroTik RouterBOARD)"]
-        RPI["Companion Gateway\n(Raspberry Pi 3B — No ROS)"]
-        PIX["Autopilot Controller\n(Pixhawk 1 / ArduRover)"]
-        
-        subgraph Sensors ["Sensors"]
-            LIDAR["360° LiDAR Scanner"]
-            GPS["GNSS & Compass"]
-            CAM["HD Camera Module"]
-        end
-        
-        subgraph Actuators ["Actuators & Safety"]
-            SERVO["Front Steering Servo"]
-            ESC["Drive ESC & Motor"]
-            RC["RC Safety Receiver"]
-        end
-    end
-
-    GCS <== "Wireless Link (Wi-Fi 2.4 GHz / 4G LTE)\nUDP 14550 Telemetry & UDP 5600 Video" ==> ROUTER
-    ROUTER <== "Fast Ethernet Cable (RJ45)" ==> RPI
-    RPI <== "High-Speed UART (921,600 bps)\nBidirectional MAVLink 2.0" ==> PIX
-
-    CAM -->|"MIPI CSI-2 Video"| RPI
-    LIDAR -->|"UART (115,200 bps)"| PIX
-    GPS -->|"UART (38,400 bps) + I2C"| PIX
-    PIX -->|"PWM 50 Hz"| SERVO
-    PIX -->|"PWM 50 Hz"| ESC
-    RC -->|"PPM / S.BUS"| PIX
-```
+![UGV Voyager 3 Communication Architecture](../images/voyager_communication_architecture.png)
 
 ---
 
-## 🔌 2. Hardware Interfaces & Bus Table
+## 2. Hardware Interfaces & Bus Table
 
 | Link / Bus | Endpoints | Physical Medium | Protocol / Encoding | Data Rate / Frequency |
 | :--- | :--- | :--- | :--- | :---: |
@@ -60,7 +28,7 @@ flowchart LR
 
 ---
 
-## 💡 3. Key Design Choices
+## 3. Key Design Choices
 
 1. **No Heavy Computation on the Raspberry Pi:**  
    The Raspberry Pi 3B is intentionally dedicated to lightweight gateway services (`MAVProxy` and `GStreamer`). It does not run heavy navigation software, ROS, or SLAM nodes onboard. This ensures zero CPU throttling, low latency, and continuous packet routing.
@@ -71,6 +39,6 @@ flowchart LR
 
 ---
 
-> 📐 **Visual System Diagram:**  
+> **Visual System Diagram:**  
 > A dedicated, clean vector architecture diagram is available in Draw.io format:  
-> [📄 `analisis_sistema/arquitectura_comunicacion_voyager.drawio`](../../analisis_sistema/arquitectura_comunicacion_voyager.drawio)
+> [`analisis_sistema/arquitectura_comunicacion_voyager.drawio`](../../analisis_sistema/arquitectura_comunicacion_voyager.drawio)
