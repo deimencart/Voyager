@@ -6,7 +6,7 @@ This document describes the internal and external communication architecture of 
 
 ## 1. High-Level Data Flow
 
-The architecture operates with a clean separation between **real-time low-level control** (Pixhawk 1) and **networked telemetry forwarding** (Raspberry Pi 3B + MikroTik Router).
+The architecture operates with a clean separation between **real-time low-level control** (The Cube / Pixhawk 2.1) and **networked telemetry forwarding** (Raspberry Pi 3B + MikroTik Router).
 
 ![UGV Voyager 3 Communication Architecture](../images/voyager_communication_architecture.png)
 

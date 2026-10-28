@@ -39,6 +39,13 @@ analisis_sistema/Voyager_3_root/
 # Office temporary lock files
 ~$*
 
+# Temporary analysis and search scratch files
+.licenses/
+analisis_sistema/*.py
+analisis_sistema/*.json
+analisis_sistema/*.txt
+analisis_sistema/*.pdf
+
 # OS specific files
 .DS_Store
 Thumbs.db

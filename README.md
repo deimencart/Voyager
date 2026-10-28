@@ -2,7 +2,7 @@
 
 > **Autonomous All-Terrain Rover with Ackermann Steering**  
 > *Platform: Fible ALTU (EU H2020 RAWFIE Project)*  
-> *Autopilot: Pixhawk 1 running ArduPilot (APM:Rover v3.4.2)*  
+> *Autopilot: The Cube Black (Pixhawk 2.1) running ArduPilot (APM:Rover v3.4.2)*  
 > *Companion Gateway: Raspberry Pi 3 Model B*
 
 ---
@@ -11,7 +11,10 @@
 
 | Section | Description | Direct Link |
 | :--- | :--- | :--- |
-| **Hardware Overview & BOM** | Complete Bill of Materials, component specs, and voltage distribution tree | [Hardware Overview](documentation/hardware_description/hardware_overview.md) |
+| **Hardware Overview & Wiki** | Complete BOM, 10-part component wiki, schematics, and voltage distribution tree | [Hardware Overview & Wiki](documentation/hardware_description/hardware_overview.md) |
+| **The Cube Black Autopilot** | Pixhawk 2.1 carrier pinouts, heated triple IMU subsystem, STM32F427 FMU | [01 — The Cube Black](documentation/hardware_description/01_the_cube_black_autopilot.md) |
+| **LightWare SF40/C LiDAR** | 360° laser scanner specs, 12V DC power rules, and ArduPilot proximity setup | [02 — LightWare SF40/C LiDAR](documentation/hardware_description/02_lightware_sf40c_lidar.md) |
+| **Raspberry Pi 3B Gateway** | High-speed UART (`/dev/serial0` @ 921.6k), power isolation, MAVProxy bridge | [03 — Raspberry Pi 3B](documentation/hardware_description/03_raspberry_pi_3b.md) |
 | **Communication Architecture** | Data flow: GCS ↔ Router ↔ Ethernet ↔ Companion Gateway ↔ Pixhawk | [Communication Architecture](documentation/hardware_description/communication_architecture.md) |
 | **Step 1: Network & Telemetry** | Wi-Fi/Ethernet setup, SSH access, and MAVProxy serial-to-UDP bridging | [01 — Network & Telemetry Setup](documentation/initial_setup/01_network_and_telemetry.md) |
 | **Step 2: Mission Planner & Drive** | GCS UDP connection, pre-arm checks, arming, and manual driving without ROS | [02 — Mission Planner & First Movement](documentation/initial_setup/02_mission_planner_and_drive.md) |
@@ -32,7 +35,7 @@ The **Voyager 3** is a rugged unmanned ground vehicle (UGV) engineered for outdo
 | Parameter | Specification | Details |
 | :--- | :--- | :--- |
 | **Drive Kinematics** | Ackermann Steering | Front-wheel steerable servo + rear-wheel traction motor |
-| **Autopilot Unit** | Pixhawk 1 (PX4v3) | STM32F427 Cortex-M4 running ArduRover v3.4.2 |
+| **Autopilot Unit** | The Cube Black (Pixhawk 2.1) | STM32F427 Cortex-M4 + STM32F100, Heated Triple IMU (45°C) running ArduRover v3.4.2 |
 | **Companion Gateway** | Raspberry Pi 3 Model B | Serial-to-Ethernet telemetry forwarding via MAVProxy (No ROS required onboard) |
 | **Onboard Network** | MikroTik mAP 2nD | Fast Ethernet switch + 2.4 GHz Wi-Fi access point + optional 4G LTE |
 | **Primary Perception** | LightWare SF40/C LiDAR | 360° laser scanner (0.2 m – 100 m range), **powered strictly at 12V DC** |
