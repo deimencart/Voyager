@@ -67,3 +67,4 @@ Estado de avance, planificación de fases y bitácora de desarrollo para el veh�
 * **2026-10-26:** Creación del entorno agentico integral (.agents, reglas, skills, guidelines y roadmap).
 * **2026-10-26:** Definición de la estrategia de portabilidad y replicabilidad para docencia e investigación (`analisis_sistema/GUIA_REPRODUCIBILIDAD_DOCENCIA.md`).
 * **2026-10-28:** Ingesta bibliográfica y auditoría exhaustiva de *Agentic World Action Models (AW-0)*. Creación del informe técnico y actualización del corpus de investigación en `candidate_papers.json`.
+* **2026-10-28:** Elaboración de propuestas de modernización de hardware, GAP Analysis comparativo y plan de migración para Pixhawk y Raspberry Pi ([`documentation/hardware_description/11_hardware_upgrade_and_gap_analysis.md`](file:///d:/Voyager/documentation/hardware_description/11_hardware_upgrade_and_gap_analysis.md)).

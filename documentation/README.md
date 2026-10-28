@@ -22,6 +22,7 @@ Detailed technical specifications, pinout tables, schematics, electrical power d
   * [08 — Ackermann Steering & Actuators](hardware_description/08_ackermann_actuators_chassis.md)
   * [09 — Power Distribution Tree](hardware_description/09_power_distribution_tree.md)
   * [10 — ArduRover Parameters Master Table](hardware_description/10_ardurover_parameters_master.md)
+  * [11 — Hardware Upgrade & GAP Analysis](hardware_description/11_hardware_upgrade_and_gap_analysis.md)
 
 ---
 

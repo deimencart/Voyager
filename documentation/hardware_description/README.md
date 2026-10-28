@@ -43,6 +43,7 @@ Navigate to any document below for component specifications, pinout tables, data
 | :--- | :--- |
 | [09 — Power Distribution Tree](09_power_distribution_tree.md) | 4-domain decoupled power tree, 4S LiPo battery, BEC regulators, ATX supply trip warning |
 | [10 — ArduRover Parameters Master Table](10_ardurover_parameters_master.md) | Complete calibrated ArduRover parameter dump verified against vehicle hardware |
+| [11 — Hardware Upgrade & GAP Analysis](11_hardware_upgrade_and_gap_analysis.md) | Concise modernization guide: Pixhawk 6C vs VESC, Raspberry Pi 5 vs Jetson Orin, and safe migration |
 
 ---
 
