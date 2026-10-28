@@ -67,6 +67,6 @@ When connected through the vehicle network or directly into a laptop:
 
 ## 4. References & Documentation
 
-* [Huawei E3372 Technical Product Description](https://consumer.huawei.com/en/)
-* [Huawei HiLink CDC-Ether Protocol Reference](https://www.4gltemall.com/huawei-e3372-4g-lte-datacard.html)
-* [MikroTik RouterOS LTE Interface Setup Guide](https://help.mikrotik.com/docs/display/ROS/LTE)
+* [Huawei Official Consumer Portal](https://consumer.huawei.com/en/)
+* [OpenWrt Hardware Documentation for Huawei E3372 (HiLink / CDC-Ether)](https://openwrt.org/toh/huawei/e3372)
+* [MikroTik RouterOS LTE Interface Setup Guide](https://help.mikrotik.com/docs/spaces/ROS/pages/328114/LTE)

@@ -62,6 +62,5 @@ raspivid -n -w 1024 -h 768 -b 1000000 -fps 30 -t 0 -o - \
 
 ## 4. References & Documentation
 
-* [Raspberry Pi Camera Module v2 Product Brief (Official PDF)](https://datasheets.raspberrypi.com/camera/camera-v2-product-brief.pdf)
-* [Sony IMX219PQ Image Sensor Specifications](https://github.com/raspberrypi/documentation/tree/develop/documentation/asciidoc/computers/camera)
-* [Raspberry Pi Camera Hardware Integration Guide](https://www.raspberrypi.com/documentation/computers/camera_software.html)
+* [eLinux Raspberry Pi Camera Module Hardware Guide](https://elinux.org/Rpi_Camera_Module)
+* [Raspberry Pi Hardware Documentation Repository](https://github.com/raspberrypi/documentation)

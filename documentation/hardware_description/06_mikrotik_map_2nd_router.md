@@ -83,7 +83,6 @@ The router is configured to support two modes of wireless connectivity:
 
 ## 5. References & Documentation
 
-* [MikroTik mAP 2nD Official Product Brochure (PDF)](https://i.mt.lv/product_files/mAP-qg_191149.pdf)
+* [MikroTik mAP 2nD Specifications & Downloads](https://mikrotik.com/product/RBmAP2nD)
 * [MikroTik RouterBOARD mAP User Manual (Official Documentation)](https://help.mikrotik.com/docs/display/UM/mAP)
-* [MikroTik mAP 2nD Specifications & Firmware Downloads](https://mikrotik.com/product/RBmAP2nD)
-* [MikroTik RouterOS 4G/LTE Interface Configuration Guide](https://help.mikrotik.com/docs/display/ROS/LTE)
+* [MikroTik RouterOS LTE Interface Configuration Guide](https://help.mikrotik.com/docs/spaces/ROS/pages/328114/LTE)

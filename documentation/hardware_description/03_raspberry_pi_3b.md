@@ -79,7 +79,7 @@ core_freq=250
 
 ## 5. References & Documentation
 
-* [Raspberry Pi 3 Model B Official Product Brief (PDF)](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-b-product-brief.pdf)
 * [Raspberry Pi 3 Model B Reduced Schematics (PDF)](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-b-reduced-schematics.pdf)
-* [Raspberry Pi Official Hardware & UART Documentation](https://www.raspberrypi.com/documentation/computers/configuration.html#configuring-uarts)
-* [Broadcom BCM2837 ARM Peripherals Architecture](https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf)
+* [Raspberry Pi 3 Model B+ Product Brief (PDF)](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-b-plus-product-brief.pdf)
+* [eLinux Raspberry Pi Serial UART Hardware Guide](https://elinux.org/RPi_Serial_Connection)
+* [Broadcom BCM2835/BCM2837 ARM Peripherals Architecture (PDF)](https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf)

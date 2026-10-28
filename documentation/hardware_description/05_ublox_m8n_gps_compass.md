@@ -65,6 +65,6 @@ On electric ground rovers, the propulsion drivetrain draws massive current pulse
 ## 4. References & Documentation
 
 * [u-blox NEO-M8 Series Official Data Sheet (PDF)](https://content.u-blox.com/sites/default/files/NEO-M8-FW3_DataSheet_UBX-15031086.pdf)
-* [u-blox NEO-M8 Hardware Integration Manual (PDF)](https://content.u-blox.com/sites/default/files/NEO-M8_HardwareIntegrationManual_%28UBX-13003221%29.pdf)
+* [u-blox 8 / M8 Receiver Description & Protocol Specification (PDF)](https://content.u-blox.com/sites/default/files/products/documents/u-blox8-M8_ReceiverDescrProtSpec_UBX-13003221.pdf)
 * [ArduPilot GPS & Compass Module Integration Guide](https://ardupilot.org/rover/docs/common-installing-3dr-ublox-gps-compass-module.html)
 * [ArduPilot Advanced Compass Calibration Protocol](https://ardupilot.org/rover/docs/common-compass-calibration-in-mission-planner.html)
