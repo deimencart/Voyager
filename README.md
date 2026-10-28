@@ -15,6 +15,7 @@
 | **Communication Architecture** | Data flow: GCS ↔ Router ↔ Ethernet ↔ Companion Gateway ↔ Pixhawk | [Communication Architecture](documentation/hardware_description/communication_architecture.md) |
 | **Step 1: Network & Telemetry** | Wi-Fi/Ethernet setup, SSH access, and MAVProxy serial-to-UDP bridging | [01 — Network & Telemetry Setup](documentation/initial_setup/01_network_and_telemetry.md) |
 | **Step 2: Mission Planner & Drive** | GCS UDP connection, pre-arm checks, arming, and manual driving without ROS | [02 — Mission Planner & First Movement](documentation/initial_setup/02_mission_planner_and_drive.md) |
+| **ROS 2 Environment Setup** | Complete ROS 2 Humble installation guide for Windows (WSL2) and Linux (Ubuntu 22.04) | [ROS 2 Installation Guide](documentation/ros2_setup/01_ros2_installation.md) |
 
 ---
 
