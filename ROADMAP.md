@@ -55,6 +55,10 @@ Estado de avance, planificación de fases y bitácora de desarrollo para el veh�
 - [ ] Configuración del stack de navegación Nav2 con plugins específicos para cinemática Ackermann (e.g. `RegulatedPurePursuitController` o `TEB Local Planner`).
 - [ ] Misiones de navegación por waypoints GPS en exteriores y telemetría por túnel 4G LTE celular.
 
+### Fase 5: Autonomía Jerárquica y Supervisión Agentica (I+D Futuro)
+- [ ] Integración de agente supervisor en estación terrena (GCS) para síntesis de misiones y políticas de navegación en lenguaje natural / código.
+- [x] Evaluación técnica de modelos generativos de acción de mundo (**Agentic WAM / AW-0**, arXiv:2610.30136): registro formal en [`analisis_sistema/EVALUACION_TECNICA_AGENTIC_WAM_AW0.md`](file:///d:/Voyager/analisis_sistema/EVALUACION_TECNICA_AGENTIC_WAM_AW0.md). Conclusión de inviabilidad on-board en Raspberry Pi 3B (1 GB RAM) y adopción del modelo jerárquico deliberativo GCS + control determinista Ackermann local.
+
 ---
 
 ## 📝 Registro de Sesiones
@@ -62,3 +66,4 @@ Estado de avance, planificación de fases y bitácora de desarrollo para el veh�
 * **2026-10-24:** Validación del enlace Hotspot, telemetría QGC/Mission Planner, corrección eléctrica 12V del LiDAR SF40/C.
 * **2026-10-26:** Creación del entorno agentico integral (.agents, reglas, skills, guidelines y roadmap).
 * **2026-10-26:** Definición de la estrategia de portabilidad y replicabilidad para docencia e investigación (`analisis_sistema/GUIA_REPRODUCIBILIDAD_DOCENCIA.md`).
+* **2026-10-28:** Ingesta bibliográfica y auditoría exhaustiva de *Agentic World Action Models (AW-0)*. Creación del informe técnico y actualización del corpus de investigación en `candidate_papers.json`.

@@ -11,7 +11,8 @@
 
 | Section | Description | Direct Link |
 | :--- | :--- | :--- |
-| **Hardware Overview & Wiki** | Complete BOM, 10-part component wiki, schematics, and voltage distribution tree | [Hardware Overview & Wiki](documentation/hardware_description/hardware_overview.md) |
+| **Documentation Suite Index** | High-level master index of all hardware, setup, and ROS 2 guides | [Documentation Index](documentation/README.md) |
+| **Hardware Wiki & Index** | Complete 10-part component index, BOM, pinout tables, and voltage tree | [Hardware Documentation Index](documentation/hardware_description/README.md) |
 | **The Cube Black Autopilot** | Pixhawk 2.1 carrier pinouts, heated triple IMU subsystem, STM32F427 FMU | [01 — The Cube Black](documentation/hardware_description/01_the_cube_black_autopilot.md) |
 | **LightWare SF40/C LiDAR** | 360° laser scanner specs, 12V DC power rules, and ArduPilot proximity setup | [02 — LightWare SF40/C LiDAR](documentation/hardware_description/02_lightware_sf40c_lidar.md) |
 | **Raspberry Pi 3B Gateway** | High-speed UART (`/dev/serial0` @ 921.6k), power isolation, MAVProxy bridge | [03 — Raspberry Pi 3B](documentation/hardware_description/03_raspberry_pi_3b.md) |

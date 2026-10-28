@@ -1,5 +1,7 @@
 # Hardware Overview & Component Wiki
 
+> **Navigation:** [Hardware Documentation Index](README.md) | [Documentation Suite](../../README.md)
+
 This document provides the high-level Bill of Materials (BOM), the four-domain decoupled power tree, and the navigation index for the complete hardware documentation of the **UGV Voyager 3**.
 
 ---
