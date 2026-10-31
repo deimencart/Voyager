@@ -19,7 +19,11 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'nearness_diagram_node = voyager_navigation.nearness_diagram_ackermann_node:main'
+            'nearness_diagram_node = voyager_navigation.nearness_diagram_ackermann_node:main',
+            'sf40_scan_node = voyager_navigation.sf40_scan_node:main',
+            'ackermann_steering_teleop_node = voyager_navigation.ackermann_steering_teleop_node:main',
+            'voyager_teleop_key = voyager_navigation.voyager_teleop_key_node:main',
+            'gps_waypoint_follower = voyager_navigation.gps_waypoint_follower_node:main',
         ],
     },
 )

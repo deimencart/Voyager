@@ -100,7 +100,7 @@ rosdep update
 
 Our setup requires MAVROS (MAVLink bridge), Ackermann message interfaces, and TF2 transform libraries:
 
-### Step 5.1: Install MAVROS and Message Packages
+### Step 5.1: Install MAVROS, Message Packages and Perception Libraries
 ```bash
 sudo apt install -y \
     ros-humble-mavros \
@@ -109,7 +109,16 @@ sudo apt install -y \
     ros-humble-tf2-ros \
     ros-humble-tf2-geometry-msgs \
     ros-humble-sensor-msgs \
-    ros-humble-nav-msgs
+    ros-humble-sensor-msgs-py \
+    ros-humble-nav-msgs \
+    ros-humble-rviz2 \
+    python3-opencv \
+    gstreamer1.0-tools \
+    gstreamer1.0-plugins-base \
+    gstreamer1.0-plugins-good \
+    gstreamer1.0-plugins-bad \
+    gstreamer1.0-plugins-ugly \
+    gstreamer1.0-libav
 ```
 
 ### Step 5.2: Install GeographicLib Datasets (Mandatory for MAVROS)
@@ -169,13 +178,21 @@ voyager_bringup
 voyager_navigation
 ```
 
-Verify that the Nearness Diagram node and launch files can be located:
+Verify that all Voyager nodes and launch files can be located:
 ```bash
 ros2 pkg executables voyager_navigation
+ros2 pkg executables voyager_bringup
 ```
 **Expected Output:**
 ```text
+voyager_navigation ackermann_steering_teleop_node
+voyager_navigation gps_waypoint_follower
 voyager_navigation nearness_diagram_node
+voyager_navigation sf40_scan_node
+voyager_navigation voyager_teleop_key
+voyager_bringup camera_receiver_node
 ```
+
+For dedicated operating and single-command launch workflows on native Linux, refer to [02 — Native Linux Migration & Operation Guide](02_native_linux_migration_and_operation.md).
 
 Your environment is now fully configured and ready to communicate with the rover via ROS 2.

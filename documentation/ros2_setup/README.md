@@ -9,6 +9,7 @@ This section provides the complete environment setup guides for controlling the 
 | Step | Guide Document | Target Platforms | Description |
 | :---: | :--- | :--- | :--- |
 | **01** | [01 — ROS 2 Installation Guide](01_ros2_installation.md) | Ubuntu 22.04 LTS (Native) / Windows 11 (WSL2) | Binary package installation, MAVROS setup, GeographicLib datasets, workspace compilation, and UDP telemetry verification |
+| **02** | [02 — Native Linux Migration & Operation Guide](02_native_linux_migration_and_operation.md) | Ubuntu 22.04 LTS (Dedicated Linux Workstation) | Complete migration guide, single-command launch, network configuration, removal of Windows relay layer, and operation checklist |
 
 ---
 

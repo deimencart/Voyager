@@ -11,6 +11,9 @@
   <depend>launch</depend>
   <depend>launch_ros</depend>
   <depend>mavros</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>tf2_ros</depend>
   <depend>voyager_navigation</depend>
 
   <export>

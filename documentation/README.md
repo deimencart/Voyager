@@ -36,3 +36,4 @@ Step-by-step procedures to power the rover, connect to network telemetry, config
 ### 3. ROS 2 Software Environment
 Installation instructions and workspace setup for controlling the vehicle using the Robot Operating System (ROS 2 Humble).
 * [01 — ROS 2 Installation Guide](ros2_setup/01_ros2_installation.md): Step-by-step installation for Linux (Ubuntu 22.04 LTS native) and Windows (WSL2), MAVROS integration, and UDP network verification.
+* [02 — Native Linux Migration & Operation Guide](ros2_setup/02_native_linux_migration_and_operation.md): Dedicated Linux migration manual, single-command launch (`voyager_bringup`), network configuration, GStreamer H.264 video, and operation checklist without WSL2 overhead.

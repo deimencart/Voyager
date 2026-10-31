@@ -8,7 +8,8 @@ backup_sdbackup/
 *.zip
 
 # Cloned third-party external repositories
-repos/
+repos/*
+!repos/*.py
 
 # ROS 2 build, install, and log artifacts
 ros2_ws/build/
