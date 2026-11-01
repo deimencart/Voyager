@@ -77,7 +77,7 @@ def main(args=None):
     max_v = 1.2       # m/s tope dinámico ampliado (con rampa slew-rate anti-brownout)
     max_w = 1.0       # rad/s
     v_step = 0.1
-    w_step = 0.15
+    w_step = 0.35      # Incremento de dirección ampliado para giros más vivos (3 toques = 100% deflexión)
 
     print(BANNER)
 

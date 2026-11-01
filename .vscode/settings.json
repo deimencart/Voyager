@@ -1,0 +1,35 @@
+{
+  "python.autoComplete.extraPaths": [
+    "//wsl.localhost/Ubuntu-22.04/opt/ros/humble/local/lib/python3.10/dist-packages",
+    "//wsl.localhost/Ubuntu-22.04/opt/ros/humble/lib/python3.10/site-packages",
+    "/opt/ros/humble/local/lib/python3.10/dist-packages",
+    "/opt/ros/humble/lib/python3.10/site-packages",
+    "${workspaceFolder}/ros2_ws/install/voyager_bringup/lib/python3.10/site-packages",
+    "${workspaceFolder}/ros2_ws/install/voyager_navigation/lib/python3.10/site-packages",
+    "${workspaceFolder}/ros2_ws/src/voyager_bringup",
+    "${workspaceFolder}/ros2_ws/src/voyager_navigation"
+  ],
+  "python.analysis.extraPaths": [
+    "//wsl.localhost/Ubuntu-22.04/opt/ros/humble/local/lib/python3.10/dist-packages",
+    "//wsl.localhost/Ubuntu-22.04/opt/ros/humble/lib/python3.10/site-packages",
+    "/opt/ros/humble/local/lib/python3.10/dist-packages",
+    "/opt/ros/humble/lib/python3.10/site-packages",
+    "${workspaceFolder}/ros2_ws/install/voyager_bringup/lib/python3.10/site-packages",
+    "${workspaceFolder}/ros2_ws/install/voyager_navigation/lib/python3.10/site-packages",
+    "${workspaceFolder}/ros2_ws/src/voyager_bringup",
+    "${workspaceFolder}/ros2_ws/src/voyager_navigation"
+  ],
+  "terminal.integrated.profiles.windows": {
+    "ROS 2 Humble (WSL)": {
+      "path": "C:\\Windows\\System32\\wsl.exe",
+      "args": [
+        "-d",
+        "Ubuntu-22.04",
+        "--cd",
+        "/mnt/d/Voyager/ros2_ws"
+      ],
+      "icon": "terminal-linux"
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "ROS 2 Humble (WSL)"
+}

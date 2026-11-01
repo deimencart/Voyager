@@ -72,5 +72,42 @@ flowchart LR
 
 ---
 
-## 4. INTEGRACIÓN CON GEMELO DIGITAL Y SIMULACIÓN
+## 4. TRABAJO FUTURO: EVOLUCIÓN DE LA PERCEPCIÓN LIDAR Y MIGRACIÓN A ROS 2 ON-BOARD
+
+Actualmente, el UGV Voyager 3 se encuentra en una **fase híbrida de transición**:
+* **A bordo del robot (Actual):** La Raspberry Pi 3 ejecuta el sistema legado Raspbian Stretch (32-bit `armv7l`) cumpliendo exclusivamente funciones de pasarela ligera MAVLink por UDP y streaming de vídeo H.264 por Wi-Fi. **El robot físico todavía no ejecuta ROS 2 a bordo**.
+* **Estación de Ingeniería (Actual):** El entorno ROS 2 Humble corre externamente en WSL2 / PC, decodificando la telemetría MAVLink que llega por la red inalámbrica.
+* **Percepción Actual (Cuello de Botella):** El LiDAR SF40/C está conectado al puerto `SERIAL 4/5` de la Pixhawk 1. Como el driver `AP_Proximity` de ArduRover v3.4.2 filtra las lecturas en octantes, solo se transmiten **8 puntos discretos** ($45^\circ$ por sector) vía mensajes MAVLink `DISTANCE_SENSOR` (ID 132), los cuales el nodo `sf40_scan_node.py` en la PC sintetiza volumétricamente mediante el algoritmo Arc-Cloud 3D.
+
+Para el despliegue futuro en el que el robot ejecute ROS 2 directamente a bordo, se establecen dos hitos de modernización de la nube de puntos:
+
+### Hito Futuro 1: Upgrade Firmware Pixhawk a ArduRover 4.x (Resolución Intermedia: 72 Sectores)
+* **Objetivo:** Incrementar la densidad angular sin modificar el conexionado físico actual.
+* **Mecanismo:** Actualizar ArduRover a versión 4.0/4.1 (techo de la Pixhawk 1 / STM32F427 por memoria flash de 2MB).
+* **Mejora:** Sustituir `DISTANCE_SENSOR` por el mensaje MAVLink estándar `OBSTACLE_DISTANCE` (ID 330).
+* **Resultado:** Pasa de 8 a **72 sectores discretos** ($\Delta\theta = 5.0^\circ$), multiplicando por $9\times$ la resolución perimetral para evasión reactiva.
+
+### Hito Futuro 2: Despliegue de ROS 2 On-Board y Bypass del LiDAR (Resolución Máxima: 1.024 - 2.048 Puntos)
+* **Objetivo:** Disponer de una nube de puntos densa real para mapeo SLAM (`slam_toolbox` / `cartographer_ros`) y navegación autónoma Nav2 independiente de la estación terrena.
+* **Arquitectura On-Board:**
+  1. Instalar un sistema operativo de 64 bits (`arm64`) como Ubuntu Server 22.04 LTS en una nueva microSD (o actualizar la SBC a Raspberry Pi 5 / Jetson Orin Nano).
+  2. Ejecutar ROS 2 Humble de forma nativa a bordo del robot.
+* **Bypass Físico del LiDAR (Desacople de la Pixhawk):**
+  1. **Señal de Datos:** Desconectar los cables serie (TX/RX) del SF40/C del puerto `SERIAL 4/5` de la Pixhawk y conectarlos directamente a la computadora de a bordo mediante un adaptador USB-UART industrial (FTDI) a 115.200 bps o velocidad superior.
+  2. **Alimentación Eléctrica Aislada (CRÍTICO):** Mantener incondicionalmente la alimentación del LiDAR en la línea dedicada de **12V DC de la PDB** (batería principal). Jamás alimentar desde los 5V de la Raspberry Pi.
+  3. **Driver ROS 2 Nativo:** Ejecutar un nodo de lectura directa del protocolo binario de LightWare a bordo, publicando directamente en `/scan` (`sensor_msgs/msg/LaserScan`) y `/cloud` (`sensor_msgs/msg/PointCloud2`).
+* **Resultado:** Escaneo continuo a 360° con **1.024 a 2.048 puntos por vuelta** a 10 Hz ($\Delta\theta \approx 0.18^\circ - 0.35^\circ$), eliminando la latencia de la Pixhawk y liberando su CPU exclusivamente para el control de actuadores Ackermann y EKF.
+
+| Métrica | Fase Actual (Híbrida MAVLink) | Hito Futuro 1 (ArduRover 4.x) | Hito Futuro 2 (ROS 2 On-Board Directo) |
+| :--- | :---: | :---: | :---: |
+| **Ubicación de ROS 2** | Estación PC (WSL2) | Estación PC o RPi | **A Bordo del Robot (SBC)** |
+| **Origen del Flujo** | Pixhawk `SERIAL 4/5` | Pixhawk `SERIAL 4/5` | **USB-UART directo a SBC** |
+| **Protocolo de Enlace** | MAVLink `DISTANCE_SENSOR` | MAVLink `OBSTACLE_DISTANCE` | **Protocolo Nativo LightWare UART** |
+| **Puntos por Revolución** | **8** | **72** | **1.024 – 2.048** |
+| **Resolución Angular** | $45.0^\circ$ | $5.0^\circ$ | **$\approx 0.25^\circ$** |
+| **Capacidad Operativa** | Evasión de colisión simple | Detección perimetral gruesa | **SLAM 2D / 3D y Nav2 Completo** |
+
+---
+
+## 5. INTEGRACIÓN CON GEMELO DIGITAL Y SIMULACIÓN
 * El chasis Ackermann con sus límites ($1100-1900\,\mu\text{s}$) y el LiDAR 360° pueden ser modelados en simulación física para validar trayectorias, control de trayectoria y algoritmos de evitación antes de transferir las políticas de control al vehículo real (*Sim-to-Real*).

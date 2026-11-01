@@ -13,6 +13,8 @@ Estado de avance, planificación de fases y bitácora de desarrollo para el veh�
 | **Fase 2** | Stack Base ROS 2, Puente MAVROS y Visión | **Completado** | 90% |
 | **Fase 3** | Percepción LiDAR 360°, Teleoperación y Evasión Reactiva | **En Progreso** | 75% |
 | **Fase 4** | Mapeo 2D, Localización y Navegación Global (Nav2 / SLAM) | **Planificado** | 10% |
+| **Fase 5** | Trabajo Futuro: Migración ROS 2 On-Board y Bypass LiDAR denso | **Planificado** | 0% |
+| **Fase 6** | Autonomía Jerárquica y Supervisión Agentica (I+D Futuro) | **Planificado** | 15% |
 
 ---
 
@@ -61,7 +63,19 @@ Estado de avance, planificación de fases y bitácora de desarrollo para el veh�
 - [ ] Configuración del stack de navegación Nav2 con plugins específicos para cinemática Ackermann (e.g. `RegulatedPurePursuitController` o `TEB Local Planner`).
 - [ ] Misiones de navegación por waypoints GPS en exteriores y telemetría por túnel 4G LTE celular.
 
-### Fase 5: Autonomía Jerárquica y Supervisión Agentica (I+D Futuro)
+### Fase 5: Trabajo Futuro — Migración de ROS 2 On-Board y Modernización del LiDAR
+> **Contexto de Operación:** Actualmente el robot no ejecuta ROS 2 a bordo; la Raspberry Pi 3 opera como pasarela ligera MAVLink UDP hacia la estación de ingeniería (PC/WSL2). El objetivo de esta fase es trasladar la pila completa de ROS 2 directamente a la computadora de misión a bordo.
+
+- [ ] **Despliegue de ROS 2 On-Board:**
+  - Instalar distribución de 64 bits (`Ubuntu Server 22.04 LTS arm64`) en nueva microSD para la Raspberry Pi 3B (o migración a SBC de mayor rendimiento como Raspberry Pi 5 / Jetson Orin Nano).
+  - Ejecutar ROS 2 Humble de forma local y autónoma a bordo, eliminando la dependencia del enlace Wi-Fi para bucles de control reactivos.
+- [ ] **Modernización de la Percepción LiDAR (Superación del cuello de botella de 8 puntos):**
+  - **Opción A (Fase intermedia):** Actualizar Pixhawk a ArduRover 4.x para habilitar el mensaje MAVLink `OBSTACLE_DISTANCE` (ID 330), escalando de 8 a **72 sectores discretos** ($5^\circ$ por sector).
+  - **Opción B (Fase definitiva para SLAM):** Desconectar líneas de datos serie (TX/RX) del SF40/C de la Pixhawk (`SERIAL 4/5`) y conectarlas directamente a la SBC vía adaptador USB-UART industrial (FTDI).
+  - **Garantía Eléctrica:** Preservar la alimentación obligatoria de **12V DC desde la PDB** para el SF40/C (prohibido alimentar desde pines de 5V de la SBC).
+  - Desarrollar/ejecutar el nodo nativo ROS 2 en la SBC para leer el protocolo binario LightWare, publicando la nube densa completa (**1.024 a 2.048 puntos por vuelta** a 10 Hz / $\Delta\theta \approx 0.25^\circ$) para mapeo SLAM de alta fidelidad.
+
+### Fase 6: Autonomía Jerárquica y Supervisión Agentica (I+D Futuro)
 - [ ] Integración de agente supervisor en estación terrena (GCS) para síntesis de misiones y políticas de navegación en lenguaje natural / código.
 - [x] Evaluación técnica de modelos generativos de acción de mundo (**Agentic WAM / AW-0**, arXiv:2610.30136): registro formal en [`analisis_sistema/EVALUACION_TECNICA_AGENTIC_WAM_AW0.md`](file:///d:/Voyager/analisis_sistema/EVALUACION_TECNICA_AGENTIC_WAM_AW0.md). Conclusión de inviabilidad on-board en Raspberry Pi 3B (1 GB RAM) y adopción del modelo jerárquico deliberativo GCS + control determinista Ackermann local.
 

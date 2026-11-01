@@ -42,6 +42,11 @@ def generate_launch_description():
         default_value='false',
         description='Inicia guiado autónomo por waypoints GPS Pure Pursuit con soporte RViz'
     )
+    enable_slam_arg = DeclareLaunchArgument(
+        'enable_slam',
+        default_value='false',
+        description='Inicia SLAM Toolbox (modo online sync) con parámetros de Voyager 3'
+    )
     enable_rviz_arg = DeclareLaunchArgument(
         'enable_rviz',
         default_value='false',
@@ -97,8 +102,10 @@ def generate_launch_description():
         condition=IfCondition(LaunchConfiguration('enable_teleop')),
         parameters=[{
             'pwm_trim': 1470,
+            'pwm_min': 1050,
+            'pwm_max': 1950,
             'throttle_neutral': 1485,
-            'pwm_forward_max': 1650,
+            'pwm_forward_max': 1750,
             'pwm_reverse_min': 1350,
             'watchdog_timeout': 0.3
         }]
@@ -149,6 +156,25 @@ def generate_launch_description():
         condition=IfCondition(LaunchConfiguration('enable_rviz'))
     )
 
+    # 8. Transformada Estática de Compatibilidad: base_link -> base_footprint (REP 105 / Nav2 / SLAM)
+    base_footprint_tf_node = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='base_link_to_base_footprint',
+        arguments=['0', '0', '0', '0', '0', '0', 'base_link', 'base_footprint']
+    )
+
+    # 9. SLAM Toolbox Online Sync (Mapeo 2D adaptado a Voyager 3)
+    slam_config_path = os.path.join(pkg_bringup, 'config', 'slam_toolbox_params.yaml')
+    slam_node = Node(
+        package='slam_toolbox',
+        executable='sync_slam_toolbox_node',
+        name='slam_toolbox',
+        output='screen',
+        parameters=[slam_config_path, {'use_sim_time': False}],
+        condition=IfCondition(LaunchConfiguration('enable_slam'))
+    )
+
     return LaunchDescription([
         enable_mavros_arg,
         enable_lidar_arg,
@@ -156,13 +182,16 @@ def generate_launch_description():
         enable_teleop_arg,
         enable_nav_arg,
         enable_gps_nav_arg,
+        enable_slam_arg,
         enable_rviz_arg,
         fcu_url_arg,
+        base_footprint_tf_node,
         mavros_node,
         lidar_node,
         camera_node,
         teleop_node,
         nd_node,
         gps_node,
+        slam_node,
         rviz_node
     ])

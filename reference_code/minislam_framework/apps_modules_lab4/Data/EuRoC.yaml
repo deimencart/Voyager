@@ -1,0 +1,32 @@
+%YAML:1.0
+Camera.type: "KannalaBrandt8"
+
+Camera.fx: 458.654
+Camera.fy: 457.296
+Camera.cx: 367.215
+Camera.cy: 248.375
+
+Camera.k0: -0.28340811
+Camera.k1: 0.07395907
+Camera.k2: 0.00019359
+Camera.k3: 0.00001762
+
+Camera.cols: 752
+Camera.rows: 480
+
+FeatureExtractor.nFeatures: 1800
+FeatureExtractor.nScales: 8
+FeatureExtractor.fScaleFactor: 1.2
+
+FeatureGrid.nGridCols: 64
+FeatureGrid.nGridRows: 48
+
+Epipolar.th: 0.002
+Matching.initialization: 100
+Matching.guidedMatching: 100
+Matching.searchByProjection: 150
+Matching.searchForTriangulation: 50
+Matching.fuse: 50
+
+Map.minObs: 50
+Triangulation.minCos: 0.9998

@@ -33,8 +33,10 @@ try:
     import rclpy
     from rclpy.node import Node
     from rclpy.executors import ExternalShutdownException
-    from geometry_msgs.msg import Twist
+    from geometry_msgs.msg import Twist, TransformStamped
     from std_msgs.msg import Bool
+    from nav_msgs.msg import Odometry
+    from tf2_ros import TransformBroadcaster
     from mavros_msgs.msg import OverrideRCIn
     ROS2_AVAILABLE = True
 except ImportError:
@@ -43,6 +45,11 @@ except ImportError:
         def __init__(self, name: str): pass
     class Twist: pass  # type: ignore
     class Bool: pass   # type: ignore
+    class TransformStamped: pass # type: ignore
+    class Odometry: pass # type: ignore
+    class TransformBroadcaster: # type: ignore
+        def __init__(self, node): pass
+        def sendTransform(self, t): pass
     class OverrideRCIn: pass # type: ignore
     ExternalShutdownException = Exception
 
@@ -65,8 +72,8 @@ class AckermannSteeringTeleopNode(Node):
 
         # Parámetros de dirección (Canal 1 - Pixhawk SERVO1)
         self.declare_parameter('pwm_trim', 1470)        # Centro neutro exacto del servo 1 (us)
-        self.declare_parameter('pwm_min', 1100)         # Límite mecánico giro a tope (us)
-        self.declare_parameter('pwm_max', 1900)         # Límite mecánico giro opuesto (us)
+        self.declare_parameter('pwm_min', 1050)         # Límite mecánico giro a tope (us) ampliado
+        self.declare_parameter('pwm_max', 1950)         # Límite mecánico giro opuesto (us) ampliado
         self.declare_parameter('max_steer_rad', 0.436)  # +/- 25 grados max deflexión mecánica
 
         # Parámetros de tracción / acelerador (Canal 3 - Pixhawk SERVO3 / RC3)
@@ -128,6 +135,19 @@ class AckermannSteeringTeleopNode(Node):
         self.last_cmd_time = time.time()
         self.packet_seq = 0
 
+        # Odometría cinemática Ackermann y emisor TF (odom -> base_link)
+        self.declare_parameter('publish_odom_tf', True)
+        self.publish_odom_tf = bool(self.get_parameter('publish_odom_tf').value)
+        if self.publish_odom_tf and ROS2_AVAILABLE:
+            self.odom_pub = self.create_publisher(Odometry, '/odom', 10)
+            self.tf_broadcaster = TransformBroadcaster(self)
+        self.odom_x = 0.0
+        self.odom_y = 0.0
+        self.odom_theta = 0.0
+        self.last_odom_time = time.time()
+        self.active_vx = 0.0
+        self.active_wz = 0.0
+
         # Temporizador de control y watchdog a 20 Hz (50 ms)
         self.timer = self.create_timer(0.05, self.control_loop)
         self.get_logger().info(
@@ -147,6 +167,8 @@ class AckermannSteeringTeleopNode(Node):
             self.target_throttle_pwm = self.throttle_neutral
             self.current_throttle_pwm = self.throttle_neutral
             self.current_steer_pwm = self.pwm_trim
+            self.active_vx = 0.0
+            self.active_wz = 0.0
             # Transmitir inmediatamente orden de DESARME a la Pixhawk
             self.send_mavlink_arm_disarm(arm=False)
             self.get_logger().warn(
@@ -169,19 +191,26 @@ class AckermannSteeringTeleopNode(Node):
         # 1. Procesamiento de Dirección (Canal 1 - Ackermann Frontal)
         # -------------------------------------------------------------
         omega_z = msg.angular.z  # rad/s enviados por teclas 'j' / 'l' o 'a' / 'd'
+        self.active_wz = omega_z
         norm_omega = max(-1.0, min(1.0, omega_z))
 
         # En Voyager 3, SERVO1_REVERSED=1 en Pixhawk:
         # omega > 0 (Izquierda) -> reduce pulso hacia pwm_min
         # omega < 0 (Derecha)   -> aumenta pulso hacia pwm_max
-        delta_pwm = (self.pwm_max - self.pwm_min) / 2.0
-        calculated_steer = self.pwm_trim - int(norm_omega * delta_pwm)
+        if norm_omega >= 0.0:
+            span_left = float(self.pwm_trim - self.pwm_min)
+            calculated_steer = self.pwm_trim - int(norm_omega * span_left)
+        else:
+            span_right = float(self.pwm_max - self.pwm_trim)
+            calculated_steer = self.pwm_trim + int(abs(norm_omega) * span_right)
+
         self.current_steer_pwm = max(self.pwm_min, min(self.pwm_max, calculated_steer))
 
         # -------------------------------------------------------------
         # 2. Procesamiento de Tracción Objetivo (Canal 3 - Variador ESC)
         # -------------------------------------------------------------
         vx = msg.linear.x  # m/s enviados por teclas 'i' / ',' o 'w' / 's'
+        self.active_vx = vx
 
         if abs(vx) < 1e-3:
             # Reposo absoluto solicitado (tecla 'k' o Espacio)
@@ -211,6 +240,8 @@ class AckermannSteeringTeleopNode(Node):
             self.target_throttle_pwm = self.throttle_neutral
             self.current_throttle_pwm = self.throttle_neutral
             self.current_steer_pwm = self.pwm_trim
+            self.active_vx = 0.0
+            self.active_wz = 0.0
         else:
             # Slew-Rate Limiter (Rampa de aceleración/deceleración suave)
             # Evita picos de corriente inductiva (inrush) y caídas de tensión (brownout) en batería
@@ -236,6 +267,47 @@ class AckermannSteeringTeleopNode(Node):
             steer_pwm=self.current_steer_pwm,
             throttle_pwm=self.current_throttle_pwm
         )
+
+        # 3. Odometría Cinemática Ackermann y Emisor TF (odom -> base_link)
+        if self.publish_odom_tf and ROS2_AVAILABLE:
+            dt = now - self.last_odom_time
+            self.last_odom_time = now
+            if 0.0 < dt < 0.5:
+                # Integración numérica del modelo bicicleta
+                self.odom_theta += self.active_wz * dt
+                self.odom_theta = math.atan2(math.sin(self.odom_theta), math.cos(self.odom_theta))
+                self.odom_x += self.active_vx * math.cos(self.odom_theta) * dt
+                self.odom_y += self.active_vx * math.sin(self.odom_theta) * dt
+
+                stamp = self.get_clock().now().to_msg()
+                qz = math.sin(self.odom_theta / 2.0)
+                qw = math.cos(self.odom_theta / 2.0)
+
+                # Publicar Odometry canónica
+                odom_msg = Odometry()
+                odom_msg.header.stamp = stamp
+                odom_msg.header.frame_id = 'odom'
+                odom_msg.child_frame_id = 'base_link'
+                odom_msg.pose.pose.position.x = self.odom_x
+                odom_msg.pose.pose.position.y = self.odom_y
+                odom_msg.pose.pose.position.z = 0.0
+                odom_msg.pose.pose.orientation.z = qz
+                odom_msg.pose.pose.orientation.w = qw
+                odom_msg.twist.twist.linear.x = self.active_vx
+                odom_msg.twist.twist.angular.z = self.active_wz
+                self.odom_pub.publish(odom_msg)
+
+                # Publicar Transformada TF dinámica odom -> base_link
+                t = TransformStamped()
+                t.header.stamp = stamp
+                t.header.frame_id = 'odom'
+                t.child_frame_id = 'base_link'
+                t.transform.translation.x = self.odom_x
+                t.transform.translation.y = self.odom_y
+                t.transform.translation.z = 0.0
+                t.transform.rotation.z = qz
+                t.transform.rotation.w = qw
+                self.tf_broadcaster.sendTransform(t)
 
     def send_direct_mavlink_override(self, steer_pwm: int, throttle_pwm: int):
         """Empaqueta y transmite MAVLink RC_CHANNELS_OVERRIDE (Msg ID 70)"""

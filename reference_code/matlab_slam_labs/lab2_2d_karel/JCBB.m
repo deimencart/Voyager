@@ -1,0 +1,136 @@
+%-------------------------------------------------------
+function H = JCBB (prediction, observations, compatibility)
+% 
+%-------------------------------------------------------
+global Best;
+global configuration;
+
+Best.H = zeros(1, observations.m);
+
+JCBB_R (prediction, observations, compatibility, [], 1);
+
+H = Best.H;
+configuration.name = 'JCBB';
+
+%-------------------------------------------------------
+function JCBB_R (prediction, observations, compatibility, H, i)
+% 
+%-------------------------------------------------------
+global Best;
+global configuration;
+
+if i > observations.m % leaf node?
+    disp(length(H));           % ← ¿cuántos elementos tiene H?
+    disp(observations.m);      % ← ¿cuántos debería tener?
+    H(observations.m) =0; 
+    if pairings(H) > pairings(Best.H) % did better?
+        Best.H = H;
+    end
+else
+    % complete JCBB here
+    for j = 1: prediction.n
+        if compatibility.ic(i,j) == 1
+            H(i) = j; 
+            if jointly_compatible(prediction, observations, H)
+                JCBB_R(prediction, observations, compatibility, H, i+1); 
+            end 
+            H(i) = 0; 
+        end
+    end
+     if pairings(H) + (observations.m - i) > pairings(Best.H)
+         JCBB_R(prediction, observations, compatibility, H, i+1); 
+     end
+end
+
+%-------------------------------------------------------
+% 
+%-------------------------------------------------------
+function p = pairings(H)
+
+p = length(find(H));
+
+
+% %-------------------------------------------------------
+% function H = JCBB (prediction, observations, compatibility)
+% %-------------------------------------------------------
+% global Best;
+% global configuration;
+% 
+% Best.H = zeros(1, observations.m);
+% JCBB_R (prediction, observations, compatibility, zeros(1, observations.m), 1);
+% H = Best.H;
+% configuration.name = 'JCBB';
+% 
+% %-------------------------------------------------------
+% function JCBB_R (prediction, observations, compatibility, H, i)
+% %-------------------------------------------------------
+% global Best;
+% 
+% if i > observations.m  % leaf node
+%     if pairings(H) > pairings(Best.H)  % did better?
+%         Best.H = H;
+%     end
+% else
+%     % Pruning: even if we assign all remaining observations, can we beat Best?
+%     remaining = observations.m - i + 1;
+%     if pairings(H) + remaining <= pairings(Best.H)
+%         return;  % prune this branch
+%     end
+% 
+%     % Option 1: leave observation i unassigned (H(i) = 0)
+%     JCBB_R(prediction, observations, compatibility, H, i + 1);
+% 
+%     % Option 2: try assigning observation i to each compatible feature j
+%     for j = 1:prediction.n
+%         if compatibility.ic(i, j) == 1
+%             H(i) = j;
+%             if joint_compatible(prediction, observations, H, i)
+%                 JCBB_R(prediction, observations, compatibility, H, i + 1);
+%             end
+%             H(i) = 0;
+%         end
+%     end
+% end
+% 
+% %-------------------------------------------------------
+% function result = joint_compatible(prediction, observations, H, i)
+% %-------------------------------------------------------
+% load 'data/chi2';
+% 
+% assigned_obs = find(H(1:i));
+% if isempty(assigned_obs)
+%     result = 1;
+%     return;
+% end
+% 
+% assigned_features = H(assigned_obs);
+% 
+% nu = [];
+% S  = [];
+% 
+% for k = 1:length(assigned_obs)
+%     oi = assigned_obs(k);
+%     fj = assigned_features(k);
+% 
+%     pi = find(prediction.idx == fj);
+%     if isempty(pi)
+%         result = 0;
+%         return;
+%     end
+% 
+% 
+%     dz = observations.z(:, oi) - prediction.h(:, pi);
+%     dz(2) = atan2(sin(dz(2)), cos(dz(2)));
+% 
+%     nu = [nu; dz];
+%     S  = blkdiag(S, prediction.HPH(:,:,pi) + observations.R(:,:,oi));
+% end
+% 
+% d2 = nu' * inv(S) * nu;
+% dof = 2 * length(assigned_obs);
+% result = (d2 <= chi2(dof));
+% 
+% %-------------------------------------------------------
+% function p = pairings(H)
+% %-------------------------------------------------------
+% p = length(find(H));

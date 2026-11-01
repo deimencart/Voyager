@@ -52,21 +52,43 @@ class SF40ScanNode(Node):
             2: -math.pi / 2.0,      # -90° (Derecha, -Y)
             1: -math.pi / 4.0       # -45° (Frente-Derecha)
         }
+
+        # Precomputación O(1) de mapeo angular para LaserScan densificado (360 rayos, 1°/muestra)
+        self.num_rays = 360
+        self.angle_increment = (2.0 * math.pi) / self.num_rays
+        self.angle_min = -math.pi
+        self.angle_max = math.pi - self.angle_increment
+        self.ray_to_sector = []
+        for i in range(self.num_rays):
+            ray_angle = self.angle_min + (i * self.angle_increment)
+            best_ori = min(
+                self.angle_map.keys(),
+                key=lambda ori: abs(math.atan2(math.sin(ray_angle - self.angle_map[ori]), math.cos(ray_angle - self.angle_map[ori])))
+            )
+            self.ray_to_sector.append(best_ori)
         
         self.timer = self.create_timer(0.1, self.loop)  # 10 Hz
         self.get_logger().info('SF40 LiDAR Arc-Cloud Node iniciado en UDP 14550')
 
     def publish_static_tf(self):
-        """Publica la transformada base_link -> laser_frame"""
-        t = TransformStamped()
-        t.header.stamp = self.get_clock().now().to_msg()
-        t.header.frame_id = 'base_link'
-        t.child_frame_id = 'laser_frame'
-        t.transform.translation.x = 0.15
-        t.transform.translation.y = 0.0
-        t.transform.translation.z = 0.20
-        t.transform.rotation.w = 1.0
-        self.tf_broadcaster.sendTransform(t)
+        """Publica la transformada base_link -> laser_frame y base_link -> base_footprint"""
+        now = self.get_clock().now().to_msg()
+        t1 = TransformStamped()
+        t1.header.stamp = now
+        t1.header.frame_id = 'base_link'
+        t1.child_frame_id = 'laser_frame'
+        t1.transform.translation.x = 0.15
+        t1.transform.translation.y = 0.0
+        t1.transform.translation.z = 0.20
+        t1.transform.rotation.w = 1.0
+
+        t2 = TransformStamped()
+        t2.header.stamp = now
+        t2.header.frame_id = 'base_link'
+        t2.child_frame_id = 'base_footprint'
+        t2.transform.rotation.w = 1.0
+
+        self.tf_broadcaster.sendTransform([t1, t2])
 
     def loop(self):
         # Drenar paquetes UDP
@@ -98,20 +120,20 @@ class SF40ScanNode(Node):
 
         now = self.get_clock().now().to_msg()
 
-        # 1. Publicar LaserScan estándar
+        # 1. Publicar LaserScan sector-densificado (360 rayos, 1° por muestra, compatible SLAM y Nav2)
         scan = LaserScan()
         scan.header.stamp = now
         scan.header.frame_id = 'laser_frame'
-        scan.angle_min = -math.pi
-        scan.angle_max = math.pi - (math.pi / 4.0)
-        scan.angle_increment = math.pi / 4.0
+        scan.angle_min = self.angle_min
+        scan.angle_max = self.angle_max
+        scan.angle_increment = self.angle_increment
+        scan.time_increment = 0.0
+        scan.scan_time = 0.1
         scan.range_min = 0.10
         scan.range_max = 20.0
         scan.ranges = [
-            float(self.distances[4]), float(self.distances[3]),
-            float(self.distances[2]), float(self.distances[1]),
-            float(self.distances[0]), float(self.distances[7]),
-            float(self.distances[6]), float(self.distances[5])
+            float(self.distances[sec]) if (0.10 <= self.distances[sec] <= 20.0) else float('inf')
+            for sec in self.ray_to_sector
         ]
         self.scan_pub.publish(scan)
 
