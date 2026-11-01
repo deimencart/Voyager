@@ -83,6 +83,9 @@ Estado de avance, planificación de fases y bitácora de desarrollo para el veh�
 
 ## 📝 Registro de Sesiones
 * **2026-10-18:** Auditoría inicial del sistema operativo Stretch, clonación forense y volcado de parámetros.
+* **2026-10-24:** Consolidación de red autónoma, validación MAVLink QGC/Mission Planner, streaming CSI H.264 y auditoría eléctrica de 12V del LiDAR.
+* **2026-10-31:** Percepción en tiempo real del LiDAR SF40/C en RViz 2 vía Arc-Cloud 3D a 10 Hz, teleoperación Ackermann y E-STOP con MAVLink directo.
+* **2026-11-02:** Auditoría de viabilidad de SLAM, deconstrucción matemática del fallo de Scan Matching con arcos, verificación de topología de red (TELEM 1/2, GPS 2) y especificación del bypass USB-TTL (Serial-over-IP) en `16_analisis_arquitectura_lidar_sf40c_slam_vs_proximidad.md`.
 * **2026-10-24:** Validación del enlace Hotspot, telemetría QGC/Mission Planner, corrección eléctrica 12V del LiDAR SF40/C.
 * **2026-10-26:** Creación del entorno agentico integral (.agents, reglas, skills, guidelines y roadmap).
 * **2026-10-26:** Definición de la estrategia de portabilidad y replicabilidad para docencia e investigación (`analisis_sistema/GUIA_REPRODUCIBILIDAD_DOCENCIA.md`).

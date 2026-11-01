@@ -69,6 +69,7 @@ flowchart TD
 | **13** | [`13_matlab_ekf_jcbb_benchmark_guide.md`](file:///d:/Voyager/documentation/slam_and_vision/13_matlab_ekf_jcbb_benchmark_guide.md) | Deconstrucción del código MATLAB: EKF 1D/2D, script `karel2d_lab2.m`, `JCBB.m`, fallo catastrófico de `NN.m`, datasets `.mat` y análisis con personas dinámicas. | Laboratorios 1 y 2 de SLAM (Unizar). |
 | **14** | [`14_minislam_architecture_and_benchmarks.md`](file:///d:/Voyager/documentation/slam_and_vision/14_minislam_architecture_and_benchmarks.md) | Deconstrucción del framework C++ Mini-SLAM: Módulos (Calibration, Tracking, Mapping, g2o), tareas del Team 8, evaluación en EuRoC/TUM-VI y ATE RMSE. | Framework Mini-SLAM (Unizar). |
 | **15** | [`15_guia_practica_mapeo_interiores.md`](file:///d:/Voyager/documentation/slam_and_vision/15_guia_practica_mapeo_interiores.md) | Guía práctica de mapeo en interiores para UGV Voyager 3: 5 terminales sincronizadas, hipótesis mundo estático, cierre de bucle de Neira y guardado con Nav2. | Procedimiento de laboratorio, ROS 2 Humble. |
+| **16** | [`16_analisis_arquitectura_lidar_sf40c_slam_vs_proximidad.md`](file:///d:/Voyager/documentation/slam_and_vision/16_analisis_arquitectura_lidar_sf40c_slam_vs_proximidad.md) | Análisis arquitectónico del LiDAR SF40/C: génesis RAWFIE, cuello de botella AP_Proximity MAVLink (8 arcos), fallo de Scan Matching (Ceres), topología de red TELEM 1/2 y hoja de ruta bypass USB-TTL (Serial-over-IP). | Arquitectura de percepción Voyager 3, SLAM vs Proximidad. |
 
 ---
 
